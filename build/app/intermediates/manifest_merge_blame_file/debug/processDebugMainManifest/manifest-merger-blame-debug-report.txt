@@ -1,0 +1,577 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.mindrium.gad_app_team"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="35" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:6:5-67
+15-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:6:22-64
+16    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+16-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:3:5-78
+16-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:3:22-76
+17    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- 알림 권한 -->
+17-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:4:5-76
+17-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:4:22-74
+18    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+18-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:4:5-76
+18-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:4:22-74
+19    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+19-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:7:5-79
+19-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:7:22-76
+20    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+20-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:8:5-81
+20-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:8:22-78
+21    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+21-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:9:5-85
+21-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:9:22-82
+22    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" /> <!-- 쿼리 설정 (ProcessTextPlugin 등 용도) -->
+22-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:10:5-78
+22-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:10:22-76
+23    <queries>
+23-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:81:5-86:15
+24        <intent>
+24-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:82:9-85:18
+25            <action android:name="android.intent.action.PROCESS_TEXT" />
+25-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:83:13-72
+25-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:83:21-70
+26
+27            <data android:mimeType="text/plain" />
+27-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:84:13-50
+27-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:84:19-48
+28        </intent>
+29    </queries>
+30
+31    <uses-feature android:name="android.hardware.camera.any" />
+31-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-64
+31-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:19-61
+32
+33    <uses-permission android:name="android.permission.CAMERA" />
+33-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:5-65
+33-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:22-62
+34    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+34-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:5-71
+34-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:22-68
+35    <uses-permission
+35-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:5-13:38
+36        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+36-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:9-65
+37        android:maxSdkVersion="28" />
+37-->[:camera_android_camerax] /Users/songmyoungseok/Desktop/gad_app_team/build/camera_android_camerax/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:13:9-35
+38    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+39    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+39-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:26:5-79
+39-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:26:22-76
+40    <uses-permission android:name="android.permission.VIBRATE" />
+40-->[:flutter_local_notifications] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_local_notifications/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-66
+40-->[:flutter_local_notifications] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_local_notifications/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:22-63
+41    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+41-->[com.google.android.recaptcha:recaptcha:18.6.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a4d584e90cacee82c31e8a9beca296d3/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:9:5-98
+41-->[com.google.android.recaptcha:recaptcha:18.6.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a4d584e90cacee82c31e8a9beca296d3/transformed/jetified-recaptcha-18.6.1/AndroidManifest.xml:9:22-95
+42
+43    <permission
+43-->[androidx.core:core:1.16.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b08d256a4f6a9df7f0a4e40cda541306/transformed/core-1.16.0/AndroidManifest.xml:22:5-24:47
+44        android:name="com.mindrium.gad_app_team.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+44-->[androidx.core:core:1.16.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b08d256a4f6a9df7f0a4e40cda541306/transformed/core-1.16.0/AndroidManifest.xml:23:9-81
+45        android:protectionLevel="signature" />
+45-->[androidx.core:core:1.16.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b08d256a4f6a9df7f0a4e40cda541306/transformed/core-1.16.0/AndroidManifest.xml:24:9-44
+46
+47    <uses-permission android:name="com.mindrium.gad_app_team.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+47-->[androidx.core:core:1.16.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b08d256a4f6a9df7f0a4e40cda541306/transformed/core-1.16.0/AndroidManifest.xml:26:5-97
+47-->[androidx.core:core:1.16.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b08d256a4f6a9df7f0a4e40cda541306/transformed/core-1.16.0/AndroidManifest.xml:26:22-94
+48
+49    <application
+50        android:name="android.app.Application"
+51        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+51-->[androidx.core:core:1.16.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b08d256a4f6a9df7f0a4e40cda541306/transformed/core-1.16.0/AndroidManifest.xml:28:18-86
+52        android:debuggable="true"
+53        android:extractNativeLibs="false"
+54        android:icon="@mipmap/ic_launcher"
+55        android:label="gad_app_team"
+56        android:usesCleartextTraffic="true" >
+57        <activity
+58            android:name="com.mindrium.gad_app_team.MainActivity"
+59            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+60            android:exported="true"
+61            android:hardwareAccelerated="true"
+62            android:launchMode="singleTop"
+63            android:taskAffinity=""
+64            android:theme="@style/LaunchTheme"
+65            android:windowSoftInputMode="adjustResize" >
+66            <meta-data
+67                android:name="io.flutter.embedding.android.NormalTheme"
+68                android:resource="@style/NormalTheme" />
+69
+70            <intent-filter>
+71                <action android:name="android.intent.action.MAIN" />
+72
+73                <category android:name="android.intent.category.LAUNCHER" />
+74            </intent-filter>
+75        </activity>
+76
+77        <!-- Flutter 플러그인 등록용 메타데이터 -->
+78        <meta-data
+79            android:name="flutterEmbedding"
+80            android:value="2" />
+81
+82        <!-- flutter_local_notifications 리시버들 -->
+83        <receiver
+84            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver"
+85            android:exported="false" />
+86        <receiver
+87            android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver"
+88            android:exported="false" >
+89            <intent-filter>
+90                <action android:name="android.intent.action.BOOT_COMPLETED" />
+91            </intent-filter>
+92        </receiver>
+93
+94        <!-- ─────────────────────────────────────────────────────────────────────────── -->
+95        <!-- Home Widget 플러그인 관련: 위젯 브로드캐스트 리시버 등록 -->
+96        <receiver
+97            android:name="dev.fluttercommunity.plus.home_widget.HomeWidgetReceiver"
+98            android:exported="true"
+99            android:label="MyWidget" >
+100            <intent-filter>
+101                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+102            </intent-filter>
+103
+104            <meta-data
+105                android:name="android.appwidget.provider"
+106                android:resource="@xml/home_widget_provider" />
+107        </receiver>
+108
+109        <!-- Home Widget 플러그인 관련: 백그라운드 서비스 등록 -->
+110        <service
+111            android:name="dev.fluttercommunity.plus.home_widget.HomeWidgetService"
+112            android:exported="true"
+113            android:permission="android.permission.BIND_JOB_SERVICE" />
+114
+115        <!-- ─────────────────────────────────────────────────────────────────────────── -->
+116
+117        <service
+117-->[:fl_location] /Users/songmyoungseok/Desktop/gad_app_team/build/fl_location/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:9-15:72
+118            android:name="com.pravera.fl_location.service.LocationServicesStatusIntentService"
+118-->[:fl_location] /Users/songmyoungseok/Desktop/gad_app_team/build/fl_location/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:13-95
+119            android:enabled="true"
+119-->[:fl_location] /Users/songmyoungseok/Desktop/gad_app_team/build/fl_location/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:13:13-35
+120            android:exported="false"
+120-->[:fl_location] /Users/songmyoungseok/Desktop/gad_app_team/build/fl_location/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:14:13-37
+121            android:permission="android.permission.BIND_JOB_SERVICE" />
+121-->[:fl_location] /Users/songmyoungseok/Desktop/gad_app_team/build/fl_location/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:15:13-69
+122
+123        <receiver
+123-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:9-13:47
+124            android:name="com.pravera.flutter_activity_recognition.service.ActivityRecognitionIntentReceiver"
+124-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:13-110
+125            android:enabled="true"
+125-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-35
+126            android:exported="true" />
+126-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:13-36
+127
+128        <service
+128-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:15:9-19:72
+129            android:name="com.pravera.flutter_activity_recognition.service.ActivityRecognitionIntentService"
+129-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:16:13-109
+130            android:enabled="true"
+130-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:17:13-35
+131            android:exported="false"
+131-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:18:13-37
+132            android:permission="android.permission.BIND_JOB_SERVICE" />
+132-->[:flutter_activity_recognition] /Users/songmyoungseok/Desktop/gad_app_team/build/flutter_activity_recognition/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:19:13-69
+133        <service
+133-->[:cloud_firestore] /Users/songmyoungseok/Desktop/gad_app_team/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:19
+134            android:name="com.google.firebase.components.ComponentDiscoveryService"
+134-->[:cloud_firestore] /Users/songmyoungseok/Desktop/gad_app_team/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:18-89
+135            android:directBootAware="true"
+135-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:32:13-43
+136            android:exported="false" >
+136-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:68:13-37
+137            <meta-data
+137-->[:cloud_firestore] /Users/songmyoungseok/Desktop/gad_app_team/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+138                android:name="com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar"
+138-->[:cloud_firestore] /Users/songmyoungseok/Desktop/gad_app_team/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-134
+139                android:value="com.google.firebase.components.ComponentRegistrar" />
+139-->[:cloud_firestore] /Users/songmyoungseok/Desktop/gad_app_team/build/cloud_firestore/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+140            <meta-data
+140-->[:firebase_auth] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+141                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
+141-->[:firebase_auth] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
+142                android:value="com.google.firebase.components.ComponentRegistrar" />
+142-->[:firebase_auth] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_auth/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+143            <meta-data
+143-->[:firebase_storage] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_storage/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+144                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
+144-->[:firebase_storage] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_storage/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-126
+145                android:value="com.google.firebase.components.ComponentRegistrar" />
+145-->[:firebase_storage] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_storage/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+146            <meta-data
+146-->[:firebase_core] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-11:85
+147                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+147-->[:firebase_core] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:17-124
+148                android:value="com.google.firebase.components.ComponentRegistrar" />
+148-->[:firebase_core] /Users/songmyoungseok/Desktop/gad_app_team/build/firebase_core/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:17-82
+149            <meta-data
+149-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:69:13-71:85
+150                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+150-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:70:17-109
+151                android:value="com.google.firebase.components.ComponentRegistrar" />
+151-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:71:17-82
+152            <meta-data
+152-->[com.google.firebase:firebase-firestore:25.1.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/dd1bb63dd7d3437d710bc0a529af2d16/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:17:13-19:85
+153                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+153-->[com.google.firebase:firebase-firestore:25.1.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/dd1bb63dd7d3437d710bc0a529af2d16/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:18:17-122
+154                android:value="com.google.firebase.components.ComponentRegistrar" />
+154-->[com.google.firebase:firebase-firestore:25.1.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/dd1bb63dd7d3437d710bc0a529af2d16/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:19:17-82
+155            <meta-data
+155-->[com.google.firebase:firebase-firestore:25.1.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/dd1bb63dd7d3437d710bc0a529af2d16/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:20:13-22:85
+156                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+156-->[com.google.firebase:firebase-firestore:25.1.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/dd1bb63dd7d3437d710bc0a529af2d16/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:21:17-111
+157                android:value="com.google.firebase.components.ComponentRegistrar" />
+157-->[com.google.firebase:firebase-firestore:25.1.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/dd1bb63dd7d3437d710bc0a529af2d16/transformed/jetified-firebase-firestore-25.1.3/AndroidManifest.xml:22:17-82
+158            <meta-data
+158-->[com.google.firebase:firebase-storage:21.0.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/862383e6469791397280dc6a7024cf32/transformed/jetified-firebase-storage-21.0.1/AndroidManifest.xml:30:13-32:85
+159                android:name="com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar"
+159-->[com.google.firebase:firebase-storage:21.0.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/862383e6469791397280dc6a7024cf32/transformed/jetified-firebase-storage-21.0.1/AndroidManifest.xml:31:17-118
+160                android:value="com.google.firebase.components.ComponentRegistrar" />
+160-->[com.google.firebase:firebase-storage:21.0.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/862383e6469791397280dc6a7024cf32/transformed/jetified-firebase-storage-21.0.1/AndroidManifest.xml:32:17-82
+161            <meta-data
+161-->[com.google.firebase:firebase-storage:21.0.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/862383e6469791397280dc6a7024cf32/transformed/jetified-firebase-storage-21.0.1/AndroidManifest.xml:33:13-35:85
+162                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+162-->[com.google.firebase:firebase-storage:21.0.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/862383e6469791397280dc6a7024cf32/transformed/jetified-firebase-storage-21.0.1/AndroidManifest.xml:34:17-107
+163                android:value="com.google.firebase.components.ComponentRegistrar" />
+163-->[com.google.firebase:firebase-storage:21.0.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/862383e6469791397280dc6a7024cf32/transformed/jetified-firebase-storage-21.0.1/AndroidManifest.xml:35:17-82
+164            <meta-data
+164-->[com.google.firebase:firebase-appcheck:18.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a6cfafe9425043b5cb9b72e3fea3716d/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:25:13-27:85
+165                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar"
+165-->[com.google.firebase:firebase-appcheck:18.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a6cfafe9425043b5cb9b72e3fea3716d/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:26:17-120
+166                android:value="com.google.firebase.components.ComponentRegistrar" />
+166-->[com.google.firebase:firebase-appcheck:18.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a6cfafe9425043b5cb9b72e3fea3716d/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:27:17-82
+167            <meta-data
+167-->[com.google.firebase:firebase-appcheck:18.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a6cfafe9425043b5cb9b72e3fea3716d/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:28:13-30:85
+168                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckRegistrar"
+168-->[com.google.firebase:firebase-appcheck:18.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a6cfafe9425043b5cb9b72e3fea3716d/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:29:17-117
+169                android:value="com.google.firebase.components.ComponentRegistrar" />
+169-->[com.google.firebase:firebase-appcheck:18.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/a6cfafe9425043b5cb9b72e3fea3716d/transformed/jetified-firebase-appcheck-18.0.0/AndroidManifest.xml:30:17-82
+170            <meta-data
+170-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/76acf87c3e659eb5524024792ccdf96f/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
+171                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+171-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/76acf87c3e659eb5524024792ccdf96f/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:13:17-116
+172                android:value="com.google.firebase.components.ComponentRegistrar" />
+172-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/76acf87c3e659eb5524024792ccdf96f/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:14:17-82
+173            <meta-data
+173-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:35:13-37:85
+174                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+174-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:36:17-109
+175                android:value="com.google.firebase.components.ComponentRegistrar" />
+175-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:37:17-82
+176        </service>
+177
+178        <activity
+178-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:29:9-46:20
+179            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+179-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:30:13-80
+180            android:excludeFromRecents="true"
+180-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:31:13-46
+181            android:exported="true"
+181-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:32:13-36
+182            android:launchMode="singleTask"
+182-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:33:13-44
+183            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+183-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:34:13-72
+184            <intent-filter>
+184-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:35:13-45:29
+185                <action android:name="android.intent.action.VIEW" />
+185-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:36:17-69
+185-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:36:25-66
+186
+187                <category android:name="android.intent.category.DEFAULT" />
+187-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:38:17-76
+187-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:38:27-73
+188                <category android:name="android.intent.category.BROWSABLE" />
+188-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:39:17-78
+188-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:39:27-75
+189
+190                <data
+190-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:84:13-50
+191                    android:host="firebase.auth"
+192                    android:path="/"
+193                    android:scheme="genericidp" />
+194            </intent-filter>
+195        </activity>
+196        <activity
+196-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:47:9-64:20
+197            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+197-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:48:13-79
+198            android:excludeFromRecents="true"
+198-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:49:13-46
+199            android:exported="true"
+199-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:50:13-36
+200            android:launchMode="singleTask"
+200-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:51:13-44
+201            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+201-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:52:13-72
+202            <intent-filter>
+202-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:53:13-63:29
+203                <action android:name="android.intent.action.VIEW" />
+203-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:36:17-69
+203-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:36:25-66
+204
+205                <category android:name="android.intent.category.DEFAULT" />
+205-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:38:17-76
+205-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:38:27-73
+206                <category android:name="android.intent.category.BROWSABLE" />
+206-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:39:17-78
+206-->[com.google.firebase:firebase-auth:23.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/e745e4f3891e390f06305250a3d1b5b7/transformed/jetified-firebase-auth-23.2.0/AndroidManifest.xml:39:27-75
+207
+208                <data
+208-->/Users/songmyoungseok/Desktop/gad_app_team/android/app/src/main/AndroidManifest.xml:84:13-50
+209                    android:host="firebase.auth"
+210                    android:path="/"
+211                    android:scheme="recaptcha" />
+212            </intent-filter>
+213        </activity>
+214
+215        <service
+215-->[androidx.camera:camera-camera2:1.5.0-beta01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b4c1da7f03bbf0aefa5a0ee133fe58f5/transformed/jetified-camera-camera2-1.5.0-beta01/AndroidManifest.xml:24:9-33:19
+216            android:name="androidx.camera.core.impl.MetadataHolderService"
+216-->[androidx.camera:camera-camera2:1.5.0-beta01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b4c1da7f03bbf0aefa5a0ee133fe58f5/transformed/jetified-camera-camera2-1.5.0-beta01/AndroidManifest.xml:25:13-75
+217            android:enabled="false"
+217-->[androidx.camera:camera-camera2:1.5.0-beta01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b4c1da7f03bbf0aefa5a0ee133fe58f5/transformed/jetified-camera-camera2-1.5.0-beta01/AndroidManifest.xml:26:13-36
+218            android:exported="false" >
+218-->[androidx.camera:camera-camera2:1.5.0-beta01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b4c1da7f03bbf0aefa5a0ee133fe58f5/transformed/jetified-camera-camera2-1.5.0-beta01/AndroidManifest.xml:27:13-37
+219            <meta-data
+219-->[androidx.camera:camera-camera2:1.5.0-beta01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b4c1da7f03bbf0aefa5a0ee133fe58f5/transformed/jetified-camera-camera2-1.5.0-beta01/AndroidManifest.xml:30:13-32:89
+220                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+220-->[androidx.camera:camera-camera2:1.5.0-beta01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b4c1da7f03bbf0aefa5a0ee133fe58f5/transformed/jetified-camera-camera2-1.5.0-beta01/AndroidManifest.xml:31:17-103
+221                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+221-->[androidx.camera:camera-camera2:1.5.0-beta01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/b4c1da7f03bbf0aefa5a0ee133fe58f5/transformed/jetified-camera-camera2-1.5.0-beta01/AndroidManifest.xml:32:17-86
+222        </service>
+223        <service
+223-->[:geolocator_android] /Users/songmyoungseok/Desktop/gad_app_team/build/geolocator_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:8:9-12:56
+224            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+224-->[:geolocator_android] /Users/songmyoungseok/Desktop/gad_app_team/build/geolocator_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:13-77
+225            android:enabled="true"
+225-->[:geolocator_android] /Users/songmyoungseok/Desktop/gad_app_team/build/geolocator_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:13-35
+226            android:exported="false"
+226-->[:geolocator_android] /Users/songmyoungseok/Desktop/gad_app_team/build/geolocator_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-37
+227            android:foregroundServiceType="location" />
+227-->[:geolocator_android] /Users/songmyoungseok/Desktop/gad_app_team/build/geolocator_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:13-53
+228
+229        <provider
+229-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:9-17:20
+230            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+230-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:10:13-82
+231            android:authorities="com.mindrium.gad_app_team.flutter.image_provider"
+231-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:11:13-74
+232            android:exported="false"
+232-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:12:13-37
+233            android:grantUriPermissions="true" >
+233-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:13:13-47
+234            <meta-data
+234-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:14:13-16:75
+235                android:name="android.support.FILE_PROVIDER_PATHS"
+235-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:15:17-67
+236                android:resource="@xml/flutter_image_picker_file_paths" />
+236-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:16:17-72
+237        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
+238        <service
+238-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:19:9-31:19
+239            android:name="com.google.android.gms.metadata.ModuleDependencies"
+239-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:20:13-78
+240            android:enabled="false"
+240-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:21:13-36
+241            android:exported="false" >
+241-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:22:13-37
+242            <intent-filter>
+242-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:24:13-26:29
+243                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+243-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:25:17-94
+243-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:25:25-91
+244            </intent-filter>
+245
+246            <meta-data
+246-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:28:13-30:36
+247                android:name="photopicker_activity:0:required"
+247-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:29:17-63
+248                android:value="" />
+248-->[:image_picker_android] /Users/songmyoungseok/Desktop/gad_app_team/build/image_picker_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:30:17-33
+249        </service>
+250        <service
+250-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:24:9-32:19
+251            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
+251-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:25:13-94
+252            android:enabled="true"
+252-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:26:13-35
+253            android:exported="false" >
+253-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:27:13-37
+254            <meta-data
+254-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:29:13-31:104
+255                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
+255-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:30:17-76
+256                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
+256-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:31:17-101
+257        </service>
+258
+259        <activity
+259-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:34:9-41:20
+260            android:name="androidx.credentials.playservices.HiddenActivity"
+260-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:35:13-76
+261            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+261-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:36:13-87
+262            android:enabled="true"
+262-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:37:13-35
+263            android:exported="false"
+263-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:38:13-37
+264            android:fitsSystemWindows="true"
+264-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:39:13-45
+265            android:theme="@style/Theme.Hidden" >
+265-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/5205d9b5bb67d05d6f874dfe828e7101/transformed/jetified-credentials-play-services-auth-1.2.0-rc01/AndroidManifest.xml:40:13-48
+266        </activity>
+267        <activity
+267-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
+268            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+268-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
+269            android:excludeFromRecents="true"
+269-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
+270            android:exported="false"
+270-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
+271            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+271-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
+272        <!--
+273            Service handling Google Sign-In user revocation. For apps that do not integrate with
+274            Google Sign-In, this service will never be started.
+275        -->
+276        <service
+276-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
+277            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+277-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
+278            android:exported="true"
+278-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
+279            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+279-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
+280            android:visibleToInstantApps="true" />
+280-->[com.google.android.gms:play-services-auth:20.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/81185ab9dcece4a9bbdbc2c1c4b6647d/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
+281
+282        <provider
+282-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:23:9-28:39
+283            android:name="com.google.firebase.provider.FirebaseInitProvider"
+283-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:24:13-77
+284            android:authorities="com.mindrium.gad_app_team.firebaseinitprovider"
+284-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:25:13-72
+285            android:directBootAware="true"
+285-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:26:13-43
+286            android:exported="false"
+286-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:27:13-37
+287            android:initOrder="100" />
+287-->[com.google.firebase:firebase-common:21.0.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/16861dc918c844fc441588d0e2e72b9e/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:28:13-36
+288
+289        <activity
+289-->[com.google.android.gms:play-services-base:18.3.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/d699390951355e91651db4f7983f1a83/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:20:9-22:45
+290            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+290-->[com.google.android.gms:play-services-base:18.3.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/d699390951355e91651db4f7983f1a83/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:20:19-85
+291            android:exported="false"
+291-->[com.google.android.gms:play-services-base:18.3.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/d699390951355e91651db4f7983f1a83/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:22:19-43
+292            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+292-->[com.google.android.gms:play-services-base:18.3.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/d699390951355e91651db4f7983f1a83/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:21:19-78
+293
+294        <provider
+294-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/eb336038201435a3c7ced234deca9e25/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
+295            android:name="androidx.startup.InitializationProvider"
+295-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/eb336038201435a3c7ced234deca9e25/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:25:13-67
+296            android:authorities="com.mindrium.gad_app_team.androidx-startup"
+296-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/eb336038201435a3c7ced234deca9e25/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:26:13-68
+297            android:exported="false" >
+297-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/eb336038201435a3c7ced234deca9e25/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:27:13-37
+298            <meta-data
+298-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/eb336038201435a3c7ced234deca9e25/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+299                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+299-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/eb336038201435a3c7ced234deca9e25/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+300                android:value="androidx.startup" />
+300-->[androidx.lifecycle:lifecycle-process:2.7.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/eb336038201435a3c7ced234deca9e25/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+301            <meta-data
+301-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+302                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+302-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+303                android:value="androidx.startup" />
+303-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+304        </provider>
+305
+306        <uses-library
+306-->[androidx.window:window:1.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/0e1666edd2946d39ead35f1721097c61/transformed/jetified-window-1.2.0/AndroidManifest.xml:23:9-25:40
+307            android:name="androidx.window.extensions"
+307-->[androidx.window:window:1.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/0e1666edd2946d39ead35f1721097c61/transformed/jetified-window-1.2.0/AndroidManifest.xml:24:13-54
+308            android:required="false" />
+308-->[androidx.window:window:1.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/0e1666edd2946d39ead35f1721097c61/transformed/jetified-window-1.2.0/AndroidManifest.xml:25:13-37
+309        <uses-library
+309-->[androidx.window:window:1.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/0e1666edd2946d39ead35f1721097c61/transformed/jetified-window-1.2.0/AndroidManifest.xml:26:9-28:40
+310            android:name="androidx.window.sidecar"
+310-->[androidx.window:window:1.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/0e1666edd2946d39ead35f1721097c61/transformed/jetified-window-1.2.0/AndroidManifest.xml:27:13-51
+311            android:required="false" />
+311-->[androidx.window:window:1.2.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/0e1666edd2946d39ead35f1721097c61/transformed/jetified-window-1.2.0/AndroidManifest.xml:28:13-37
+312
+313        <meta-data
+313-->[com.google.android.gms:play-services-basement:18.4.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/7a5a7fdc61d9ba9fa1e442d314fd0584/transformed/jetified-play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+314            android:name="com.google.android.gms.version"
+314-->[com.google.android.gms:play-services-basement:18.4.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/7a5a7fdc61d9ba9fa1e442d314fd0584/transformed/jetified-play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+315            android:value="@integer/google_play_services_version" />
+315-->[com.google.android.gms:play-services-basement:18.4.0] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/7a5a7fdc61d9ba9fa1e442d314fd0584/transformed/jetified-play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+316
+317        <receiver
+317-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+318            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+318-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+319            android:directBootAware="false"
+319-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+320            android:enabled="true"
+320-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+321            android:exported="true"
+321-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+322            android:permission="android.permission.DUMP" >
+322-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+323            <intent-filter>
+323-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+324                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+324-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+324-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+325            </intent-filter>
+326            <intent-filter>
+326-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+327                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+327-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+327-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+328            </intent-filter>
+329            <intent-filter>
+329-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+330                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+330-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+330-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+331            </intent-filter>
+332            <intent-filter>
+332-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+333                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+333-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+333-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/cae8a9abe91d949075535ccf40d57f67/transformed/jetified-profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+334            </intent-filter>
+335        </receiver> <!-- The activities will be merged into the manifest of the hosting app. -->
+336        <activity
+336-->[com.google.android.play:core-common:2.0.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/931502a3ef9fb6c6083e7eefeb1cda35/transformed/jetified-core-common-2.0.3/AndroidManifest.xml:14:9-18:65
+337            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+337-->[com.google.android.play:core-common:2.0.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/931502a3ef9fb6c6083e7eefeb1cda35/transformed/jetified-core-common-2.0.3/AndroidManifest.xml:15:13-93
+338            android:exported="false"
+338-->[com.google.android.play:core-common:2.0.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/931502a3ef9fb6c6083e7eefeb1cda35/transformed/jetified-core-common-2.0.3/AndroidManifest.xml:16:13-37
+339            android:stateNotNeeded="true"
+339-->[com.google.android.play:core-common:2.0.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/931502a3ef9fb6c6083e7eefeb1cda35/transformed/jetified-core-common-2.0.3/AndroidManifest.xml:17:13-42
+340            android:theme="@style/Theme.PlayCore.Transparent" />
+340-->[com.google.android.play:core-common:2.0.3] /Users/songmyoungseok/.gradle/caches/8.10.2/transforms/931502a3ef9fb6c6083e7eefeb1cda35/transformed/jetified-core-common-2.0.3/AndroidManifest.xml:18:13-62
+341    </application>
+342
+343</manifest>
