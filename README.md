@@ -1,23 +1,8 @@
-<<<<<<< HEAD
-# flutter_application_1
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# Emotion-Behavior
-# Emotion-Behavior
-# Emotion-Behavior
-=======
-# gad_app_team
->>>>>>> 5f9edc984855343207612271be864d9788efe64d
+소개
+Mindrium은(는) 불안장애 치료 및 자기관리 지원을 위한 Flutter 기반 모바일 앱입니다.
+다양한 심리 교육, 다이어리, 이완 훈련 등 기능을 제공합니다.
+주요 기능
+주차별 심리 교육 콘텐츠
+감정/생각/행동 기록 다이어리
+이완 훈련(호흡, 근육 이완 등)
+사용자 맞춤형 피드백 및 통계
