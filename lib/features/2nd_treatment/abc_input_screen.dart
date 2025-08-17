@@ -821,7 +821,7 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
       appBar: CustomAppBar(
         title: widget.isExampleMode ? '예시 연습하기' : '2주차 - ABC 모델',
       ),
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: const Color(0xFFFBF8FF), // 연보라색으로 변경
       body: MediaQuery(
         data: MediaQuery.of(
           context,

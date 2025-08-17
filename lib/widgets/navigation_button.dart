@@ -20,60 +20,61 @@ class NavigationButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // 이전
-        Expanded(
-          child: FilledButton(
-            onPressed: onBack,
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (states) => states.contains(WidgetState.disabled)
-                    ? AppColors.grey300
-                    : AppColors.white,
-              ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (states) => states.contains(WidgetState.disabled)
-                    ? Colors.grey
-                    : Colors.indigo,
-              ),
-              shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
-                (states) {
-                  final borderColor = states.contains(WidgetState.disabled)
-                      ? Colors.grey.shade300
-                      : Colors.indigo.shade100;
-                  return RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-                    side: BorderSide(color: borderColor),
-                  );
-                },
-              ),
+        FilledButton(
+          onPressed: onBack,
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+              (states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return AppColors.grey300;
+                }
+                return AppColors.white;
+              },
             ),
-            child: Text(leftLabel, textAlign: TextAlign.center),
-          ),
-        ),
-        const SizedBox(width: 12), // 버튼 사이 간격
-        // 다음
-        Expanded(
-          child: FilledButton(
-            onPressed: onNext,
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (states) => states.contains(WidgetState.disabled)
-                    ? AppColors.grey300
-                    : Colors.indigo,
-              ),
-              foregroundColor: WidgetStateProperty.resolveWith<Color?>(
-                (states) => states.contains(WidgetState.disabled)
-                    ? Colors.grey
-                    : AppColors.white,
-              ),
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(
+            foregroundColor: WidgetStateProperty.resolveWith<Color?>(
+              (states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return Colors.grey;
+                }
+                return Colors.indigo;
+              },
+            ),
+            shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
+              (states) {
+                final borderColor = states.contains(WidgetState.disabled)
+                    ? Colors.grey.shade300
+                    : Colors.indigo.shade100;
+                return RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppSizes.borderRadius),
-                ),
-              ),
+                  side: BorderSide(color: borderColor),
+                );
+              },
             ),
-            child: Text(rightLabel, textAlign: TextAlign.center),
           ),
+          child: Text(leftLabel),
+        ),
+        FilledButton(
+          onPressed: onNext,
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+              (states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return AppColors.grey300;
+                }
+                return Colors.indigo;
+              },
+            ),
+            foregroundColor: WidgetStateProperty.resolveWith<Color?>(
+              (states) {
+                if (states.contains(WidgetState.disabled)) {
+                  return Colors.grey;
+                }
+                return AppColors.white;
+              },
+            ),
+            shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.borderRadius))),
+          ),
+          child: Text(rightLabel),
         ),
       ],
     );
