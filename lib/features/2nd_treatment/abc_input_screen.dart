@@ -45,6 +45,7 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
     final userRef = FirebaseFirestore.instance.collection('users').doc(uid);
     return userRef.collection('custom_abc_chips');
   }
+
   int _currentStep = 0;
   // Sub-step for C-step questions
   int _currentCSubStep = 0;
@@ -435,23 +436,51 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 18),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.indigo.shade100),
-                    ),
-                    child: TextField(
-                      controller: _customSymptomController,
-                      decoration: const InputDecoration(
-                        hintText: '신체 증상 입력',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
+                  // Combine input box and first suffix on one line, then break
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          // White input box
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.indigo.shade100),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 80,
+                              maxWidth: 180,
+                            ),
+                            child: TextField(
+                              controller: _customSymptomController,
+                              decoration: const InputDecoration(
+                                hintText: '예: 가슴 두근거림',
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // First suffix on same line
+                          const Text(
+                            '(이)라는',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
-                    ),
+                      const SizedBox(height: 4),
+                      // Second suffix on new line
+                      const Text(
+                        '신체증상이 나타났습니다.',
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   FilledButton(
@@ -498,6 +527,7 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
   // ================================================
 
   void _addAKeyword() {
+    final userName = Provider.of<UserProvider>(context, listen: false).userName;
     showDialog(
       context: context,
       builder:
@@ -513,7 +543,7 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    '불안감을 느꼈을 때 어떤 상황이었나요?',
+                    '$userName님 어떤 상황에서 불안하셨나요?',
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.indigo,
@@ -524,23 +554,51 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 18),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.indigo.shade100),
-                    ),
-                    child: TextField(
-                      controller: _customAKeywordController,
-                      decoration: const InputDecoration(
-                        hintText: '예: 자전거를 타려고 함',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
+                  // Combine input box and first suffix on one line, then break
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          // White input box
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.indigo.shade100),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 80,
+                              maxWidth: 150,
+                            ),
+                            child: TextField(
+                              controller: _customAKeywordController,
+                              decoration: const InputDecoration(
+                                hintText: '예: 자전거 타기',
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // First suffix, same line
+                          const Text(
+                            '(이)라는 상황에서',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
-                    ),
+                      const SizedBox(height: 4),
+                      // Second suffix on a new line
+                      const Text(
+                        '불안을 느꼈습니다.',
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                    ],
                   ),
                   if (_tutorialError != null)
                     Padding(
@@ -639,23 +697,51 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 18),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.indigo.shade100),
-                    ),
-                    child: TextField(
-                      controller: _customBKeywordController,
-                      decoration: const InputDecoration(
-                        hintText: '예: 넘어질까봐 두려움',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
+                  // Combine input box and first suffix on one line, then break
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          // White input box
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.indigo.shade100),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 80,
+                              maxWidth: 180,
+                            ),
+                            child: TextField(
+                              controller: _customBKeywordController,
+                              decoration: const InputDecoration(
+                                hintText: '예: 넘어질까봐 두려움',
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // First suffix, same line
+                          const Text(
+                            '(이)라는',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
-                    ),
+                      const SizedBox(height: 4),
+                      // Second suffix on a new line
+                      const Text(
+                        '생각을 하였습니다.',
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                    ],
                   ),
                   if (_tutorialError != null)
                     Padding(
@@ -754,23 +840,51 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 18),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.indigo.shade100),
-                    ),
-                    child: TextField(
-                      controller: _customEmotionController,
-                      decoration: const InputDecoration(
-                        hintText: '감정 입력',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
+                  // Replace single-line Container with two-line layout
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          // White input box
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.indigo.shade100),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 80,
+                              maxWidth: 180,
+                            ),
+                            child: TextField(
+                              controller: _customEmotionController,
+                              decoration: const InputDecoration(
+                                hintText: '예: 두려움',
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // Suffix on same line
+                          const Text(
+                            '(이)라는',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
-                    ),
+                      const SizedBox(height: 4),
+                      // Second suffix on a new line
+                      const Text(
+                        '감정을 느꼈습니다.',
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   FilledButton(
@@ -1606,24 +1720,52 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 18),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.indigo.shade100),
-                    ),
-                    child: TextField(
-                      controller: _addCGridController,
-                      decoration: const InputDecoration(
-                        hintText: '행동 입력',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 12,
-                        ),
+                  // Two-line input-plus-suffix layout
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          // White input box
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: Colors.indigo.shade100),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 80,
+                              maxWidth: 180,
+                            ),
+                            child: TextField(
+                              controller: _addCGridController,
+                              decoration: const InputDecoration(
+                                hintText: '예: 자전거 끌고가기',
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                              autofocus: true,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // First suffix on same line
+                          const Text(
+                            '(이)라는',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
                       ),
-                      autofocus: true,
-                    ),
+                      const SizedBox(height: 4),
+                      // Second suffix on new line
+                      const Text(
+                        '행동을 하였습니다.',
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                    ],
                   ),
                   if (_tutorialError != null)
                     Padding(
@@ -1789,10 +1931,11 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
 
     // 현재 세션에서 추가된 칩인 경우에만 Firestore에서 삭제
     if (_isCurrentSessionChip(type, label)) {
-      final query = await _chipsRef(user.uid)
-          .where('type', isEqualTo: type)
-          .where('label', isEqualTo: label)
-          .get();
+      final query =
+          await _chipsRef(user.uid)
+              .where('type', isEqualTo: type)
+              .where('label', isEqualTo: label)
+              .get();
       for (var doc in query.docs) {
         await doc.reference.delete();
       }
@@ -1852,7 +1995,6 @@ class AbcVisualizationScreen extends StatefulWidget {
 
 class AbcVisualizationScreenState extends State<AbcVisualizationScreen> {
   bool _showFeedback = true;
-
 
   Widget _buildVerticalContent() {
     return Column(
@@ -2167,6 +2309,9 @@ class AbcVisualizationScreenState extends State<AbcVisualizationScreen> {
         'activatingEvent': widget.activatingEventChips.map((e) => e.label).join(', '),
         'belief'         : widget.beliefChips.map((e) => e.label).join(', '),
         'consequence'    : widget.resultChips.map((e) => e.label).join(', '),
+        'consequence_physical': widget.selectedPhysicalChips.join(', '),
+        'consequence_emotion': widget.selectedEmotionChips.join(', '),
+        'consequence_behavior': widget.selectedBehaviorChips.join(', '),
         'createdAt'      : FieldValue.serverTimestamp(),
         if (pos != null) 'latitude' : pos.latitude,
         if (pos != null) 'longitude': pos.longitude,
