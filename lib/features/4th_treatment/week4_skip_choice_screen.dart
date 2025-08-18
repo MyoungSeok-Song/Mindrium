@@ -20,7 +20,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
     required this.remainingBList,
     this.isFromAfterSud = false,
     this.existingAlternativeThoughts,
-    this.abcId
+    this.abcId,
   });
 
   @override
@@ -58,10 +58,10 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                         Text(
                           '$userName님',
                           style: const TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
                             color: Color(0xFF5B3EFF),
-                            letterSpacing: 1.2,
+                            letterSpacing: 1.1,
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -79,11 +79,11 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                               ? "아직 불안 점수가 낮아지지 않으셨네요. 또 다른 불안한 생각이 있어서 그럴 수 있어요.\n불안을 만드는 또 다른 생각을 하나 찾아보도록 해요!"
                               : "아직 도움이 되는 생각을 찾아보지 않은 부분이 있으시네요.\n모든 생각에서 꼭 도움이 되는 생각을 찾아봐야 하는 건 아니지만,\n 그 중 하나라도 '조금 덜 불안해지는 방향'으로 바라보면 어떨까요?",
                           style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                             color: Colors.black,
-                            height: 1.6,
-                            letterSpacing: 0.2,
+                            height: 1.5,
+                            letterSpacing: 0.1,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -133,7 +133,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                       '앞서 건너뛰었던 생각을\n다시 살펴볼게요!',
                                       style: TextStyle(
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w500,
                                         height: 1.3,
                                       ),
                                       textAlign: TextAlign.center,
@@ -179,7 +179,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                     '불안을 만드는 또 다른 생각을\n하나 더 추가해볼게요.',
                                     style: TextStyle(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w500,
                                       height: 1.3,
                                     ),
                                     textAlign: TextAlign.center,

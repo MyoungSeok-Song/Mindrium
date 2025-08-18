@@ -6,9 +6,7 @@ import 'package:gad_app_team/widgets/navigation_button.dart';
 import 'package:gad_app_team/features/4th_treatment/week4_before_sud_screen.dart';
 
 class Week4ImaginationScreen extends StatefulWidget {
-  const Week4ImaginationScreen({
-    super.key,
-  });
+  const Week4ImaginationScreen({super.key});
 
   @override
   State<Week4ImaginationScreen> createState() => _Week4ImaginationScreenState();
@@ -71,10 +69,10 @@ class _Week4ImaginationScreenState extends State<Week4ImaginationScreen> {
                     Text(
                       '$userName님',
                       style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF5B3EFF),
-                        letterSpacing: 1.2,
+                        letterSpacing: 1.1,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -90,11 +88,10 @@ class _Week4ImaginationScreenState extends State<Week4ImaginationScreen> {
                     Text(
                       '이때의 상황을\n자세하게 상상해 보세요.',
                       style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                         color: Colors.black,
-                        height: 1.6,
-                        letterSpacing: 0.2,
+                        height: 1.5,
                       ),
                       textAlign: TextAlign.center,
                     ),

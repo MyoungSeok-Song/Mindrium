@@ -941,7 +941,18 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
           context,
         ).copyWith(textScaler: TextScaler.linear(1.2)),
         child: SafeArea(
-          child: _showGuide ? const AbcGuideScreen() : _buildMainContent(),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (_showGuide) const AbcGuideScreen(),
+                  if (!_showGuide) _buildMainContent(),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
       // floatingActionButton removed as requested
@@ -1275,9 +1286,13 @@ class _AbcInputScreenState extends State<AbcInputScreen> {
                 selected: isSelected,
                 onSelected: (_) {
                   setState(() {
-                    isSelected
-                        ? _selectedAGrid.remove(i)
-                        : _selectedAGrid.add(i);
+                    if (isSelected) {
+                      _selectedAGrid.clear();
+                    } else {
+                      _selectedAGrid
+                        ..clear()
+                        ..add(i);
+                    }
                     // 튜토리얼 모드에서 '자전거를 타려고 함' 칩을 선택하면 튜토리얼 단계 진행
                     if (widget.isExampleMode && item.label == '자전거를 타려고 함') {
                       _tutorialStep = 1;
@@ -2197,21 +2212,6 @@ class AbcVisualizationScreenState extends State<AbcVisualizationScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 18),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "당신을 응원해요!",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.pink,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 6),
-                Text("❤️", style: TextStyle(fontSize: 20)),
-              ],
-            ),
           ],
         ),
       ),
@@ -2228,7 +2228,7 @@ class AbcVisualizationScreenState extends State<AbcVisualizationScreen> {
           context,
         ).copyWith(textScaler: TextScaler.linear(1.2)),
         child: SafeArea(
-          child: Center(
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -2297,23 +2297,27 @@ class AbcVisualizationScreenState extends State<AbcVisualizationScreen> {
         if (perm == LocationPermission.always ||
             perm == LocationPermission.whileInUse) {
           pos = await Geolocator.getCurrentPosition(
-            locationSettings: const LocationSettings(accuracy: LocationAccuracy.low),
+            locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.low,
+            ),
           );
         }
       } catch (_) {
         // 위치를 얻지 못해도 저장은 진행
       }
-      
+
       // 2. ABC 모델 데이터 저장
       final data = {
-        'activatingEvent': widget.activatingEventChips.map((e) => e.label).join(', '),
-        'belief'         : widget.beliefChips.map((e) => e.label).join(', '),
-        'consequence'    : widget.resultChips.map((e) => e.label).join(', '),
+        'activatingEvent': widget.activatingEventChips
+            .map((e) => e.label)
+            .join(', '),
+        'belief': widget.beliefChips.map((e) => e.label).join(', '),
+        'consequence': widget.resultChips.map((e) => e.label).join(', '),
         'consequence_physical': widget.selectedPhysicalChips.join(', '),
         'consequence_emotion': widget.selectedEmotionChips.join(', '),
         'consequence_behavior': widget.selectedBehaviorChips.join(', '),
-        'createdAt'      : FieldValue.serverTimestamp(),
-        if (pos != null) 'latitude' : pos.latitude,
+        'createdAt': FieldValue.serverTimestamp(),
+        if (pos != null) 'latitude': pos.latitude,
         if (pos != null) 'longitude': pos.longitude,
       };
 
@@ -2323,63 +2327,66 @@ class AbcVisualizationScreenState extends State<AbcVisualizationScreen> {
           .collection('abc_models')
           .add(data);
 
-
       debugPrint('ABC 모델 저장 성공 - 사용자 ID: $userId');
       if (!mounted) return;
 
       showDialog(
         context: context,
-        builder: (dialogCtx) => AlertDialog(
-          title: const Text('걱정그룹에 추가하시겠습니까?'),
-          content: const Text('작성한 걱정일기를 그룹에 추가하시겠습니까?'),
-          actions: [
-            TextButton(
-              child: const Text('아니요'),
-              onPressed: () async {
-                // Close the dialog with its own context
-                Navigator.of(dialogCtx).pop();
-                await docRef.update({
-                  'group_id': "1", // TODO: 그룹 기본값
-                });
-                // After async gap, ensure the page is still mounted, then use State.context
-                if (!mounted) return;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => NotificationSelectionScreen(
-                      origin: widget.origin ?? 'etc',
-                      abcId: docRef.id,
-                      label: widget.activatingEventChips.isNotEmpty
-                          ? widget.activatingEventChips[0].label
-                          : '',
-                    ),
-                  ),
-                );
-              },
+        builder:
+            (dialogCtx) => AlertDialog(
+              title: const Text('걱정그룹에 추가하시겠습니까?'),
+              content: const Text('작성한 걱정일기를 그룹에 추가하시겠습니까?'),
+              actions: [
+                TextButton(
+                  child: const Text('아니요'),
+                  onPressed: () async {
+                    // Close the dialog with its own context
+                    Navigator.of(dialogCtx).pop();
+                    await docRef.update({
+                      'group_id': "1", // TODO: 그룹 기본값
+                    });
+                    // After async gap, ensure the page is still mounted, then use State.context
+                    if (!mounted) return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (_) => NotificationSelectionScreen(
+                              origin: widget.origin ?? 'etc',
+                              abcId: docRef.id,
+                              label:
+                                  widget.activatingEventChips.isNotEmpty
+                                      ? widget.activatingEventChips[0].label
+                                      : '',
+                            ),
+                      ),
+                    );
+                  },
+                ),
+                TextButton(
+                  child: const Text('예'),
+                  onPressed: () {
+                    Navigator.of(dialogCtx).pop(); // 팝업 닫기
+                    if (!mounted) return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (_) => AbcGroupAddScreen(
+                              origin: widget.origin ?? 'etc',
+                              abcId: docRef.id,
+                              label:
+                                  widget.activatingEventChips.isNotEmpty
+                                      ? widget.activatingEventChips[0].label
+                                      : '',
+                            ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-            TextButton(
-              child: const Text('예'),
-              onPressed: () {
-                Navigator.of(dialogCtx).pop(); // 팝업 닫기
-                if (!mounted) return;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => AbcGroupAddScreen(
-                      origin: widget.origin ?? 'etc',
-                      abcId: docRef.id,
-                      label: widget.activatingEventChips.isNotEmpty
-                          ? widget.activatingEventChips[0].label
-                          : '',
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
       );
-
     } catch (e) {
       debugPrint('ABC 모델 저장 실패: $e');
       if (!mounted) return;

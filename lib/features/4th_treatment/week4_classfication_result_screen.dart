@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:gad_app_team/data/user_provider.dart';
 import 'week4_skip_choice_screen.dart';
 import 'week4_after_sud_screen.dart';
+import 'week4_concentration_screen.dart';
 
 // 소개를 하는 페이지
 class Week4ClassificationResultScreen extends StatelessWidget {
@@ -62,7 +63,7 @@ class Week4ClassificationResultScreen extends StatelessWidget {
     final List<String> safeRemainingBList = remainingBList ?? const <String>[];
     final List<String> safeAllBList = allBList ?? const <String>[];
     final args = ModalRoute.of(context)?.settings.arguments as Map? ?? {};
-    final String? abcId_   = args['abcId'] as String?;
+    final String? abcId_ = args['abcId'] as String?;
 
     debugPrint('abcId: $abcId_');
 
@@ -99,10 +100,10 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                         Text(
                           '$userName님',
                           style: const TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
                             color: Color(0xFF5B3EFF),
-                            letterSpacing: 1.2,
+                            letterSpacing: 1.1,
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -118,20 +119,20 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                         Text(
                           mainQuestionText,
                           style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                             color: Colors.black,
-                            height: 1.6,
-                            letterSpacing: 0.2,
+                            height: 1.5,
+                            letterSpacing: 0.1,
                           ),
                           textAlign: TextAlign.center,
                         ),
                         if (!isFromAnxietyScreen) ...[
                           const SizedBox(height: 16),
                           Text(
-                            '만약 지금은 좀 부담스러우시다면 다른 생각들 먼저 보고 다시 돌아와도 괜찮아요.',
+                            '만약 지금은 좀 부담스러우시다면 걱정일기에 작성하셨던 다른 생각들을 먼저 보고 다시 돌아와도 괜찮아요.',
                             style: const TextStyle(
-                              fontSize: 17,
+                              fontSize: 16,
                               fontWeight: FontWeight.w500,
                               color: Color(0xFF5B3EFF),
                               height: 1.4,
@@ -165,7 +166,8 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                                       ? [mainThought]
                                                       : [],
                                               beforeSud: safeBeforeSud,
-                                              remainingBList: safeRemainingBList,
+                                              remainingBList:
+                                                  safeRemainingBList,
                                               existingAlternativeThoughts:
                                                   _removeDuplicates([
                                                     ...?existingAlternativeThoughts,
@@ -175,7 +177,7 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                                   isFromAnxietyScreen,
                                               originalBList:
                                                   safeAllBList, // 모든 B 생각들 (원래 + 추가한 불안한 생각들)
-                                              abcId: abcId_
+                                              abcId: abcId_,
                                             ),
                                         transitionDuration: Duration.zero,
                                         reverseTransitionDuration:
@@ -192,10 +194,10 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                     elevation: 0,
                                   ),
                                   child: const Text(
-                                    '도움이 되는 생각을 찾아볼게요!',
+                                    '위 생각에 대해 \n도움이 되는 생각을 찾아볼게요!',
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
@@ -210,7 +212,8 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                       // 대체생각을 하나라도 작성했으면 바로 after sud로 이동
                                       if (alternativeThoughts != null &&
                                           alternativeThoughts!.isNotEmpty) {
-                                        if (abcId_ != null && abcId_.isNotEmpty) {
+                                        if (abcId_ != null &&
+                                            abcId_.isNotEmpty) {
                                           // abcId가 있으면 named route로 이동
                                           Navigator.pushReplacementNamed(
                                             context,
@@ -222,17 +225,29 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                           Navigator.pushReplacement(
                                             context,
                                             PageRouteBuilder(
-                                              pageBuilder: (_, __, ___) => Week4AfterSudScreen(
-                                                beforeSud: safeBeforeSud,
-                                                currentB: (bList != null && bList!.isNotEmpty)
-                                                    ? bList!.last
-                                                    : '',
-                                                remainingBList: safeRemainingBList,
-                                                allBList: safeAllBList,
-                                                alternativeThoughts: alternativeThoughts ?? [],
-                                              ),
+                                              pageBuilder:
+                                                  (
+                                                    _,
+                                                    __,
+                                                    ___,
+                                                  ) => Week4AfterSudScreen(
+                                                    beforeSud: safeBeforeSud,
+                                                    currentB:
+                                                        (bList != null &&
+                                                                bList!
+                                                                    .isNotEmpty)
+                                                            ? bList!.last
+                                                            : '',
+                                                    remainingBList:
+                                                        safeRemainingBList,
+                                                    allBList: safeAllBList,
+                                                    alternativeThoughts:
+                                                        alternativeThoughts ??
+                                                        [],
+                                                  ),
                                               transitionDuration: Duration.zero,
-                                              reverseTransitionDuration: Duration.zero,
+                                              reverseTransitionDuration:
+                                                  Duration.zero,
                                             ),
                                           );
                                         }
@@ -249,35 +264,51 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                                       remainingBList:
                                                           safeRemainingBList,
                                                       abcId: abcId,
-                                                    ), 
+                                                    ),
                                             transitionDuration: Duration.zero,
                                             reverseTransitionDuration:
                                                 Duration.zero,
                                           ),
                                         );
                                       } else {
-                                        // 남은 B가 있으면 다음 B로 진행
-                                        if (abcId_ != null && abcId_.isNotEmpty) {
-                                          Navigator.pushNamed(
+                                        // 남은 B가 있으면 반드시 Week4ConcentrationScreen을 먼저 거침
+                                        if (abcId_ != null &&
+                                            abcId_.isNotEmpty) {
+                                          Navigator.push(
                                             context,
-                                            '/alt_thought',
-                                            arguments: {
-                                              'abcId': abcId_,
-                                            },
+                                            PageRouteBuilder(
+                                              pageBuilder:
+                                                  (_, __, ___) =>
+                                                      Week4ConcentrationScreen(
+                                                        bListInput:
+                                                            safeRemainingBList,
+                                                        beforeSud:
+                                                            safeBeforeSud,
+                                                        allBList: safeAllBList,
+                                                        abcId: abcId_,
+                                                      ),
+                                              transitionDuration: Duration.zero,
+                                              reverseTransitionDuration:
+                                                  Duration.zero,
+                                            ),
                                           );
                                         } else {
                                           Navigator.push(
                                             context,
                                             PageRouteBuilder(
-                                              pageBuilder: (_, __, ___) => Week4ClassificationScreen(
-                                                bListInput: safeRemainingBList,
-                                                beforeSud: safeBeforeSud,
-                                                allBList: safeAllBList,
-                                                alternativeThoughts: alternativeThoughts,
-                                                abcId: abcId,
-                                              ),
+                                              pageBuilder:
+                                                  (_, __, ___) =>
+                                                      Week4ConcentrationScreen(
+                                                        bListInput:
+                                                            safeRemainingBList,
+                                                        beforeSud:
+                                                            safeBeforeSud,
+                                                        allBList: safeAllBList,
+                                                        abcId: abcId,
+                                                      ),
                                               transitionDuration: Duration.zero,
-                                              reverseTransitionDuration: Duration.zero,
+                                              reverseTransitionDuration:
+                                                  Duration.zero,
                                             ),
                                           );
                                         }
@@ -296,10 +327,10 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                       elevation: 0,
                                     ),
                                     child: const Text(
-                                      '다른 생각으로 진행할게요.',
+                                      '걱정일기에 작성했던 \n또 다른 생각으로 진행할게요.',
                                       style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                   ),

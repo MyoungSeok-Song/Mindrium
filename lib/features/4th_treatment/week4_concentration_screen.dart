@@ -18,7 +18,7 @@ class Week4ConcentrationScreen extends StatefulWidget {
     required this.bListInput,
     required this.beforeSud,
     required this.allBList,
-    this.abcId
+    this.abcId,
   });
 
   @override
@@ -31,6 +31,7 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
   int _secondsLeft = 10;
   Map<String, dynamic>? _abcModel;
   bool _isLoading = true;
+  bool _showSituation = true; // 추가: 상황(검정) 먼저, 이후 안내(보라)
 
   @override
   void initState() {
@@ -54,13 +55,14 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception('로그인 정보 없음');
 
-      final snapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .collection('abc_models')
-          .orderBy('createdAt', descending: true)
-          .limit(1)
-          .get();
+      final snapshot =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .collection('abc_models')
+              .orderBy('createdAt', descending: true)
+              .limit(1)
+              .get();
 
       if (!mounted) return;
 
@@ -92,12 +94,13 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception('로그인 정보 없음');
 
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .collection('abc_models')
-          .doc(abcId)
-          .get();
+      final doc =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .collection('abc_models')
+              .doc(abcId)
+              .get();
 
       if (!mounted) return;
 
@@ -172,6 +175,9 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
   @override
   Widget build(BuildContext context) {
     final userName = Provider.of<UserProvider>(context, listen: false).userName;
+    // 현재 보여줄 B(생각) 추출
+    final currentThought =
+        widget.bListInput.isNotEmpty ? widget.bListInput[0] : '';
     return Scaffold(
       backgroundColor: const Color(0xFFFBF8FF),
       appBar: const CustomAppBar(title: '4주차 - 인지 왜곡 찾기'),
@@ -198,10 +204,9 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                     Text(
                       '$userName님',
                       style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF5B3EFF),
-                        letterSpacing: 1.2,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -214,53 +219,42 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    if (_isLoading)
-                      const CircularProgressIndicator()
-                    else
-                      Column(
-                        children: [
-                          Text(
-                            _abcModel != null
-                                ? "'${_abcModel!['activatingEvent'] ?? ''}' (라)는 상황을 잠시 집중해보겠습니다."
-                                : '이때의 상황을\n자세하게 집중해 보세요.',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                              height: 1.6,
-                              letterSpacing: 0.2,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          if (_abcModel != null &&
-                              _abcModel!['belief'] != null &&
-                              _abcModel!['belief'].toString().isNotEmpty) ...[
-                            const SizedBox(height: 16),
-                            Text(
-                              "'${_getFirstBelief(_abcModel!['belief'])}'\n생각에 대해 얼마나 강하게 믿고 계신지 알아볼게요.",
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF5B3EFF),
-                                height: 1.4,
+                    _isLoading
+                        ? const CircularProgressIndicator()
+                        : Column(
+                          children: [
+                            if (_showSituation)
+                              Text(
+                                _abcModel != null
+                                    ? "'${_abcModel!['activatingEvent'] ?? ''}' (라는) 상황을 잠시 집중해보겠습니다."
+                                    : '이때의 상황을 자세하게 집중해 보세요.',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                  height: 1.5,
+                                ),
+                                textAlign: TextAlign.center,
+                              )
+                            else
+                              Text(
+                                _abcModel != null &&
+                                        _abcModel!['belief'] != null &&
+                                        _abcModel!['belief']
+                                            .toString()
+                                            .isNotEmpty
+                                    ? "'$currentThought' 생각에 대해 얼마나 강하게 믿고 계신지 알아볼게요."
+                                    : '위 생각에 대해 어느 정도 믿음을 가지고 있는지 알아볼게요.',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                  height: 1.5,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ] else ...[
-                            const SizedBox(height: 16),
-                            Text(
-                              '위 생각에 대해 어느 정도 믿음을 가지고 있는지 알아볼게요.',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF5B3EFF),
-                                height: 1.4,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
                           ],
-                        ],
-                      ),
+                        ),
                     const SizedBox(height: 32),
                     if (!_isNextEnabled)
                       Text(
@@ -285,21 +279,25 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
           onNext:
               _isNextEnabled
                   ? () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder:
-                            (_, __, ___) => Week4ClassificationScreen(
-                              bListInput:
-                                  widget.allBList, // 모든 B 생각들을 전달 (건너뛴 생각들 포함)
-                              beforeSud: widget.beforeSud,
-                              allBList: widget.allBList,
-                              abcId: widget.abcId
-                            ),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      ),
-                    );
+                    if (_showSituation) {
+                      setState(() => _showSituation = false);
+                    } else {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (_, __, ___) => Week4ClassificationScreen(
+                                bListInput:
+                                    widget.bListInput, // 두 번째 생각이 정상적으로 보이도록 수정
+                                beforeSud: widget.beforeSud,
+                                allBList: widget.allBList,
+                                abcId: widget.abcId,
+                              ),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      );
+                    }
                   }
                   : null,
         ),
