@@ -28,31 +28,27 @@ class Week6BehaviorClassificationScreen extends StatelessWidget {
     final userName = Provider.of<UserProvider>(context, listen: false).userName;
 
     // 분류 로직
-    bool isShortTermHigh = shortTermValue >= 5.0;
-    bool isLongTermHigh = longTermValue >= 5.0;
+    bool isShortTermHigh = shortTermValue == 10;
+    bool isLongTermHigh = longTermValue == 10;
 
     String mainText;
-    String subText;
-
+    // 조건별 자연스러운 문장
     if (isShortTermHigh && !isLongTermHigh) {
-      // 단기적으로 높고 장기적으로 낮음 → 불안을 회피하는 행동
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 행동을 분석해보니 불안을 회피하는 행동에 가깝습니다.';
-      subText =
-          '단기적으로는 불안이 많이 완화되지만 장기적으로는 적게 완화되는 패턴을 보이기 때문이에요. 이런 행동은 일시적으로 불안이 완화돼서 편안함을 주지만, 지속 시 불안을 해결하지 못할 수 있어요.';
+      // 단기 높고 장기 낮음 → 회피
+      mainText =
+          '방금 보셨던 "$selectedBehavior"(라)는 행동에 대해 단기적으로는 불안이 많이 완화되지만 장기적으로는 적게 완화된다고 해주셨습니다. \n\n이런 행동은 보통 불안을 회피하는 행동에 가깝기 때문에, 일시적으로는 불안이 완화되어 편안함을 주지만 지속 시 불안을 해결하는 데 큰 도움이 되지 않을 수 있어요!';
     } else if (!isShortTermHigh && isLongTermHigh) {
-      // 단기적으로 낮고 장기적으로 높음 → 불안을 직면하는 행동
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 행동을 분석해보니 불안을 직면하는 행동에 가깝습니다.';
-      subText =
-          '단기적으로는 불안이 적게 완화되지만 장기적으로는 많이 완화되는 패턴을 보이기 때문이에요. 이런 행동은 일시적으로 불안이 높아져서 처음에는 어려울 수 있지만, 지속 시 불안을 해결하는 데 도움이 될 수 있어요!';
+      // 단기 낮고 장기 높음 → 직면
+      mainText =
+          '방금 보셨던 "$selectedBehavior"(라)는 행동에 대해 단기적으로는 불안이 적게 완화되지만 장기적으로는 많이 완화된다고 해주셨습니다. \n\n이런 행동은 보통 불안을 직면하는 행동에 가깝기 때문에, 일시적으로 불안이 높아져서 처음에는 어려울 수 있지만 지속 시 불안을 해결하는 데 도움이 될 수 있어요!';
     } else if (isShortTermHigh && isLongTermHigh) {
-      // 단기/장기 모두 높음 → 중립적
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 행동을 분석해보니 중립적인 행동에 가깝습니다.';
-      subText = '단기적으로도 장기적으로도 불안이 많이 완화되는 패턴을 보이기 때문이에요. (적절한 문구 생각하기)';
+      // 단기/장기 모두 높음 → 중립적(긍정)
+      mainText =
+          '방금 보셨던 "$selectedBehavior"(라)는 행동에 대해 단기적으로도 장기적으로도 불안이 많이 완화된다고 해주셨습니다. \n\n좋은 부분도 있지만 여기서 주의할 점이 있어요. 만약 불안을 줄이는 데 ‘안전장치’를 썼다면 뇌는 여전히 그 장치 없이는 불안하다고 배울 수 있어요. 반대로 안전장치 없이도 불안이 줄었다면 저강도 직면이 잘 된 거예요. 이 행동이 어느 쪽에 가까운지 생각해보시면 좋을거 같아요.';
     } else {
-      // 단기/장기 모두 낮음 → 중립적
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 행동을 분석해보니 중립적인 행동에 가깝습니다.';
-      subText =
-          '단기적으로도 장기적으로도 불안이 적게 완화되는 패턴을 보이기 때문이에요. 이런 행동은 불안 해결에 큰 도움이 되지 않을 수 있어요.';
+      // 단기/장기 모두 낮음 → 중립적(부정)
+      mainText =
+          '방금 보셨던 "$selectedBehavior"(라)는 행동에 대해 단기적으로도 장기적으로도 불안이 적게 완화된다고 해주셨습니다. \n\n이런 행동은 불안을 유지시키거나 더 키웠을 수도 있어요. 다음엔 불안이 완화될 수 있는 가능성이 조금이라도 있는 행동을 생각해보시면 좋을거 같아요.';
     }
 
     return Scaffold(
@@ -81,10 +77,10 @@ class Week6BehaviorClassificationScreen extends StatelessWidget {
                     Text(
                       '$userName님',
                       style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF5B3EFF),
-                        letterSpacing: 1.2,
+                        letterSpacing: 1.1,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -92,7 +88,7 @@ class Week6BehaviorClassificationScreen extends StatelessWidget {
                       width: 48,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF5B3EFF).withValues(alpha: 0.15),
+                        color: Color(0xFF5B3EFF).withOpacity(0.15),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -101,40 +97,12 @@ class Week6BehaviorClassificationScreen extends StatelessWidget {
                       mainText,
                       style: const TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                        height: 1.6,
-                        letterSpacing: 0.2,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      subText,
-                      style: const TextStyle(
-                        fontSize: 17,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF5B3EFF),
-                        height: 1.4,
+                        color: Colors.black,
+                        height: 1.5,
+                        letterSpacing: 0.1,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 24),
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF2F3FE),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        '단기 완화: ${shortTermValue.round()}점 | 장기 완화: ${longTermValue.round()}점',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF8888AA),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                      textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 48),
                   ],

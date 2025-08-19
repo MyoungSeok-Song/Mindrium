@@ -29,7 +29,8 @@ class Week6RelieveSliderScreen extends StatefulWidget {
 }
 
 class _Week6RelieveSliderScreenState extends State<Week6RelieveSliderScreen> {
-  double _sliderValue = 5.0;
+  // double _sliderValue = 5.0; // 슬라이더 제거
+  int? _selectedValue; // 0: 완화되지 않음, 10: 완화됨
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +110,8 @@ class _Week6RelieveSliderScreenState extends State<Week6RelieveSliderScreen> {
                       children: [
                         Text(
                           widget.isLongTerm
-                              ? '위 행동을 하신다면 장기적으로 얼마나 불안을 완화될까요?\n아래 슬라이더를 조정해 주세요.'
-                              : '위 행동을 하신다면 단기적으로 얼마나 불안을 완화될까요?\n아래 슬라이더를 조정해 주세요.',
+                              ? '위 행동을 하신다면 장기적으로 불안이 완화될 것 같으신가요?\n아래 버튼 중 하나를 선택해 주세요.'
+                              : '위 행동을 하신다면 단기적으로 불안이 완화될 것 같으신가요?\n아래 버튼 중 하나를 선택해 주세요.',
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black,
@@ -119,50 +120,93 @@ class _Week6RelieveSliderScreenState extends State<Week6RelieveSliderScreen> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 48),
-                        Slider(
-                          value: _sliderValue,
-                          min: 0,
-                          max: 10,
-                          divisions: 10,
-                          label: _sliderValue.round().toString(),
-                          activeColor: Color.lerp(
-                            Color(0xFFFF5252),
-                            Color(0xFF4CAF50),
-                            _sliderValue / 10,
-                          ),
-                          inactiveColor: Colors.grey[300],
-                          onChanged: (v) => setState(() => _sliderValue = v),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          '${_sliderValue.round()}점',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              '0점: 전혀 완화되지 않음',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFFFF5252),
-                                fontWeight: FontWeight.w600,
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() => _selectedValue = 0);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      _selectedValue == 0
+                                          ? const Color(0xFFFF5252)
+                                          : Colors.white,
+                                  foregroundColor:
+                                      _selectedValue == 0
+                                          ? Colors.white
+                                          : const Color(0xFFFF5252),
+                                  side: const BorderSide(
+                                    color: Color(0xFFFF5252),
+                                    width: 2,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  elevation: 0,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 18,
+                                  ),
+                                ),
+                                child: const Text(
+                                  '불안이 완화되지 않음',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ),
                             ),
-                            Text(
-                              '10점: 매우 완화됨',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF4CAF50),
-                                fontWeight: FontWeight.w600,
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() => _selectedValue = 10);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      _selectedValue == 10
+                                          ? const Color(0xFF4CAF50)
+                                          : Colors.white,
+                                  foregroundColor:
+                                      _selectedValue == 10
+                                          ? Colors.white
+                                          : const Color(0xFF4CAF50),
+                                  side: const BorderSide(
+                                    color: Color(0xFF4CAF50),
+                                    width: 2,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  elevation: 0,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 18,
+                                  ),
+                                ),
+                                child: const Text(
+                                  '불안이 완화됨',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         ),
+                        const SizedBox(height: 32),
+                        if (_selectedValue != null)
+                          Text(
+                            _selectedValue == 0
+                                ? '불안이 완화되지 않음으로 선택하셨습니다.'
+                                : '불안이 완화됨으로 선택하셨습니다.',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
                       ],
                     ),
                   ),
@@ -172,25 +216,28 @@ class _Week6RelieveSliderScreenState extends State<Week6RelieveSliderScreen> {
             const SizedBox(height: 24),
             NavigationButtons(
               onBack: () => Navigator.pop(context),
-              onNext: () {
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder:
-                        (_, __, ___) => Week6RelieveResultScreen(
-                          selectedBehavior: widget.selectedBehavior,
-                          behaviorType: widget.behaviorType,
-                          sliderValue: _sliderValue,
-                          isLongTerm: widget.isLongTerm, // 단기/장기 구분 전달
-                          shortTermValue: widget.shortTermValue, // 단기 값 전달
-                          remainingBehaviors: widget.remainingBehaviors,
-                          allBehaviorList: widget.allBehaviorList,
-                        ),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero,
-                  ),
-                );
-              },
+              onNext:
+                  _selectedValue != null
+                      ? () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (_, __, ___) => Week6RelieveResultScreen(
+                                  selectedBehavior: widget.selectedBehavior,
+                                  behaviorType: widget.behaviorType,
+                                  sliderValue: _selectedValue!.toDouble(),
+                                  isLongTerm: widget.isLongTerm,
+                                  shortTermValue: widget.shortTermValue,
+                                  remainingBehaviors: widget.remainingBehaviors,
+                                  allBehaviorList: widget.allBehaviorList,
+                                ),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ),
+                        );
+                      }
+                      : null,
             ),
           ],
         ),

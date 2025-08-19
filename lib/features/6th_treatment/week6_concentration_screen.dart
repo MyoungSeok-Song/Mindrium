@@ -9,13 +9,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Week6ConcentrationScreen extends StatefulWidget {
   final List<String> behaviorListInput;
-  final int beforeSud;
   final List<String> allBehaviorList;
 
   const Week6ConcentrationScreen({
     super.key,
     required this.behaviorListInput,
-    required this.beforeSud,
     required this.allBehaviorList,
   });
 
@@ -29,6 +27,7 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
   int _secondsLeft = 10;
   Map<String, dynamic>? _abcModel;
   bool _isLoading = true;
+  bool _showSituation = true; // 상황(검정) → 안내(검정) 순서로
 
   @override
   void initState() {
@@ -144,10 +143,10 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
                     Text(
                       '$userName님',
                       style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF5B3EFF),
-                        letterSpacing: 1.2,
+                        letterSpacing: 1.1,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -155,7 +154,7 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
                       width: 48,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: Color(0xFF5B3EFF).withValues(alpha: 0.15),
+                        color: Color(0xFF5B3EFF).withOpacity(0.15),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -165,30 +164,32 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
                     else
                       Column(
                         children: [
-                          Text(
-                            _abcModel != null
-                                ? '"${_abcModel!['activatingEvent'] ?? ''}" (라)는 상황에서 "${_getFirstBehavior(_abcModel!['consequence_behavior'])}"(라)고 행동을 하였습니다.\n당시의 상황에 대해 잠시 집중해보겠습니다.'
-                                : '이때의 상황을\n자세하게 집중해 보세요.',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                              height: 1.6,
-                              letterSpacing: 0.2,
+                          if (_showSituation)
+                            Text(
+                              _abcModel != null
+                                  ? '"${_abcModel!['activatingEvent'] ?? ''}" (라)는 상황에서 "${_getFirstBehavior(_abcModel!['consequence_behavior'])}"(라)고 행동을 하였습니다.\n당시의 상황에 대해 잠시 집중해보겠습니다.'
+                                  : '이때의 상황을\n자세하게 집중해 보세요.',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                                height: 1.5,
+                                letterSpacing: 0.1,
+                              ),
+                              textAlign: TextAlign.center,
+                            )
+                          else
+                            Text(
+                              '앞서 보셨던 행동에 대해 불안을 직면하는 행동인지 회피하는 행동인지 알아볼게요.',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                                height: 1.5,
+                                letterSpacing: 0.1,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            '위 행동에 대해 불안을 직면하는 행동인지 회피하는 행동인지 알아볼게요.',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF5B3EFF),
-                              height: 1.4,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
                         ],
                       ),
                     const SizedBox(height: 32),
@@ -215,19 +216,22 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
           onNext:
               _isNextEnabled
                   ? () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder:
-                            (_, __, ___) => Week6ClassificationScreen(
-                              behaviorListInput:
-                                  widget.allBehaviorList, // 모든 행동들을 전달
-                              allBehaviorList: widget.allBehaviorList,
-                            ),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      ),
-                    );
+                    if (_showSituation) {
+                      setState(() => _showSituation = false);
+                    } else {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (_, __, ___) => Week6ClassificationScreen(
+                                behaviorListInput: widget.allBehaviorList,
+                                allBehaviorList: widget.allBehaviorList,
+                              ),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      );
+                    }
                   }
                   : null,
         ),

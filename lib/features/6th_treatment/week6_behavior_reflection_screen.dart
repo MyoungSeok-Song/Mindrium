@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:gad_app_team/data/user_provider.dart';
 import 'week6_classfication_screen.dart';
 
-class Week6BehaviorReflectionScreen extends StatelessWidget {
+class Week6BehaviorReflectionScreen extends StatefulWidget {
   final String selectedBehavior;
   final String behaviorType; // 'face' 또는 'avoid'
   final double shortTermValue; // 단기 슬라이더 값
@@ -24,12 +24,21 @@ class Week6BehaviorReflectionScreen extends StatelessWidget {
   });
 
   @override
+  State<Week6BehaviorReflectionScreen> createState() =>
+      _Week6BehaviorReflectionScreenState();
+}
+
+class _Week6BehaviorReflectionScreenState
+    extends State<Week6BehaviorReflectionScreen> {
+  bool _showMainText = true;
+
+  @override
   Widget build(BuildContext context) {
     final userName = Provider.of<UserProvider>(context, listen: false).userName;
 
     // 분류 로직 (이전 화면과 동일)
-    bool isShortTermHigh = shortTermValue >= 5.0;
-    bool isLongTermHigh = longTermValue >= 5.0;
+    bool isShortTermHigh = widget.shortTermValue == 10;
+    bool isLongTermHigh = widget.longTermValue == 10;
 
     // 실제 분석 결과 (슬라이더 값 기반)
     String actualResult;
@@ -42,62 +51,49 @@ class Week6BehaviorReflectionScreen extends StatelessWidget {
     }
 
     // 사용자가 선택한 분류
-    String userChoice = behaviorType == 'face' ? '불안을 직면하는 행동' : '불안을 회피하는 행동';
+    String userChoice =
+        widget.behaviorType == 'face' ? '불안을 직면하는 행동' : '불안을 회피하는 행동';
 
     String mainText;
     String subText;
-    String? additionalText;
+    String? nextText;
 
-    // 분류 결과와 실제 분석 결과가 다른지 확인
-    bool isDifferent =
-        (behaviorType == 'face' && !(isShortTermHigh && !isLongTermHigh)) ||
-        (behaviorType == 'avoid' && !(isShortTermHigh && !isLongTermHigh));
-
-    if (isShortTermHigh && !isLongTermHigh) {
-      // 실제로는 불안을 회피하는 행동
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 $userChoice이라고 선택하셨습니다.';
-      if (isDifferent) {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      } else {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      }
-    } else if (!isShortTermHigh && isLongTermHigh) {
-      // 실제로는 불안을 직면하는 행동
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 $userChoice이라고 선택하셨습니다.';
-      if (isDifferent) {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      } else {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      }
+    // 조건별 자연스러운 문장 (모든 조합 커버)
+    if (widget.behaviorType == 'avoid' && isShortTermHigh && !isLongTermHigh) {
+      mainText =
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 회피하는 행동이라고 선택하셨는데, 실제로 이 행동은 불안을 회피하는 쪽에 가까워 보이네요.';
+    } else if (widget.behaviorType == 'avoid' &&
+        !isShortTermHigh &&
+        isLongTermHigh) {
+      mainText =
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 회피하는 행동이라고 선택하셨지만, 실제로는 불안을 직면하는 쪽에 가까워 보이네요.';
+    } else if (widget.behaviorType == 'face' &&
+        !isShortTermHigh &&
+        isLongTermHigh) {
+      mainText =
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 직면하는 행동이라고 선택하셨는데, 실제로 이 행동은 불안을 직면하는 쪽에 가까워 보이네요.';
+    } else if (widget.behaviorType == 'face' &&
+        isShortTermHigh &&
+        !isLongTermHigh) {
+      mainText =
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 직면하는 행동이라고 선택하셨지만, 실제로는 불안을 회피하는 쪽에 가까워 보이네요.';
     } else if (isShortTermHigh && isLongTermHigh) {
-      // 중립적인 행동 (긍정적)
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 $userChoice이라고 선택하셨습니다.';
-      if (isDifferent) {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      } else {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      }
+      mainText =
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 ${userChoice}이라고 선택하셨는데, 실제로는 중립적인 행동에 가까워 보이네요.';
     } else {
-      // 중립적인 행동 (부정적)
-      mainText = '방금 보셨던 "$selectedBehavior"(라)는 $userChoice이라고 선택하셨습니다.';
-      if (isDifferent) {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      } else {
-        subText =
-            '실제로 이 행동은 분석결과 $actualResult으로 보이네요.\n이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
-      }
+      mainText =
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 ${userChoice}이라고 선택하셨는데, 실제로는 중립적인 행동에 가까워 보이네요.';
     }
+    subText = '이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
 
     // 추가 행동이 있는지 확인
-    if (remainingBehaviors != null && remainingBehaviors!.isNotEmpty) {
-      additionalText = '다음 행동도 계속 진행하겠습니다!';
+    if (!_showMainText) {
+      if (widget.remainingBehaviors != null &&
+          widget.remainingBehaviors!.isNotEmpty) {
+        nextText = '다음 행동도 계속 진행하겠습니다!';
+      } else {
+        nextText = '마지막 행동까지 완료했습니다! \n이제 마무리로 일치하지 않았던 행동들을 다시 점검해볼까요?';
+      }
     }
 
     return Scaffold(
@@ -126,10 +122,10 @@ class Week6BehaviorReflectionScreen extends StatelessWidget {
                     Text(
                       '$userName님',
                       style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF5B3EFF),
-                        letterSpacing: 1.2,
+                        letterSpacing: 1.1,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -137,61 +133,53 @@ class Week6BehaviorReflectionScreen extends StatelessWidget {
                       width: 48,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF5B3EFF).withValues(alpha: 0.15),
+                        color: Color(0xFF5B3EFF).withOpacity(0.15),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
                     const SizedBox(height: 32),
-                    Text(
-                      mainText,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                        height: 1.6,
-                        letterSpacing: 0.2,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      subText,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF5B3EFF),
-                        height: 1.4,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 24),
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF2F3FE),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        '단기 완화: ${shortTermValue.round()}점 | 장기 완화: ${longTermValue.round()}점',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF8888AA),
+                    if (_showMainText)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            mainText,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              height: 1.5,
+                              letterSpacing: 0.1,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            subText,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              height: 1.5,
+                              letterSpacing: 0.1,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      )
+                    else ...[
+                      if (nextText != null)
+                        Text(
+                          nextText!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                            height: 1.5,
+                            letterSpacing: 0.1,
+                          ),
+                          textAlign: TextAlign.left,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    if (additionalText != null) ...[
-                      const SizedBox(height: 24),
-                      Text(
-                        additionalText,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF5B3EFF),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
                     ],
                     const SizedBox(height: 48),
                   ],
@@ -206,27 +194,32 @@ class Week6BehaviorReflectionScreen extends StatelessWidget {
         child: NavigationButtons(
           onBack: () => Navigator.pop(context),
           onNext: () {
-            if (remainingBehaviors != null && remainingBehaviors!.isNotEmpty) {
-              // 추가 행동이 있으면 분류 화면으로 이동하여 루프 계속
-              Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                  pageBuilder:
-                      (_, __, ___) => Week6ClassificationScreen(
-                        behaviorListInput: remainingBehaviors!,
-                        allBehaviorList: allBehaviorList,
-                      ),
-                  transitionDuration: Duration.zero,
-                  reverseTransitionDuration: Duration.zero,
-                ),
-              );
+            if (_showMainText) {
+              setState(() => _showMainText = false);
             } else {
-              // 모든 행동을 다 처리했으면 홈 화면으로 이동
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                '/home',
-                (route) => false,
-              );
+              if (widget.remainingBehaviors != null &&
+                  widget.remainingBehaviors!.isNotEmpty) {
+                // 추가 행동이 있으면 분류 화면으로 이동하여 루프 계속
+                Navigator.pushReplacement(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder:
+                        (_, __, ___) => Week6ClassificationScreen(
+                          behaviorListInput: widget.remainingBehaviors!,
+                          allBehaviorList: widget.allBehaviorList,
+                        ),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                  ),
+                );
+              } else {
+                // 모든 행동을 다 처리했으면 홈 화면으로 이동
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/home',
+                  (route) => false,
+                );
+              }
             }
           },
         ),

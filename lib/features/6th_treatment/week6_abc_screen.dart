@@ -307,7 +307,6 @@ class _Week6AbcScreenState extends State<Week6AbcScreen> {
 
                   return Week6ConcentrationScreen(
                     behaviorListInput: behaviorList,
-                    beforeSud: 0, // 6주차는 SUD 평가가 없으므로 0으로 설정
                     allBehaviorList: behaviorList,
                   );
                 },

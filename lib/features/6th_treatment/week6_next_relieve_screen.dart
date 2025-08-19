@@ -26,6 +26,8 @@ class Week6NextRelieveScreen extends StatefulWidget {
 }
 
 class _Week6NextRelieveScreenState extends State<Week6NextRelieveScreen> {
+  bool _showMainText = true;
+
   @override
   Widget build(BuildContext context) {
     final userName = Provider.of<UserProvider>(context, listen: false).userName;
@@ -69,10 +71,10 @@ class _Week6NextRelieveScreenState extends State<Week6NextRelieveScreen> {
                     Text(
                       '$userName님',
                       style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF5B3EFF),
-                        letterSpacing: 1.2,
+                        letterSpacing: 1.1,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -80,33 +82,35 @@ class _Week6NextRelieveScreenState extends State<Week6NextRelieveScreen> {
                       width: 48,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF5B3EFF).withValues(alpha: 0.15),
+                        color: Color(0xFF5B3EFF).withOpacity(0.15),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
                     const SizedBox(height: 32),
-                    Text(
-                      mainText,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                        height: 1.6,
-                        letterSpacing: 0.2,
+                    if (_showMainText)
+                      Text(
+                        mainText,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          height: 1.5,
+                          letterSpacing: 0.1,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                    else
+                      Text(
+                        subText,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          height: 1.5,
+                          letterSpacing: 0.1,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      subText,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF5B3EFF),
-                        height: 1.4,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
                     const SizedBox(height: 48),
                   ],
                 ),
@@ -120,20 +124,24 @@ class _Week6NextRelieveScreenState extends State<Week6NextRelieveScreen> {
         child: NavigationButtons(
           onBack: () => Navigator.pop(context),
           onNext: () {
-            Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder:
-                    (_, __, ___) => Week6RelieveSliderScreen(
-                      selectedBehavior: widget.selectedBehavior,
-                      behaviorType: widget.behaviorType,
-                      remainingBehaviors: widget.remainingBehaviors,
-                      allBehaviorList: widget.allBehaviorList,
-                    ),
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero,
-              ),
-            );
+            if (_showMainText) {
+              setState(() => _showMainText = false);
+            } else {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder:
+                      (_, __, ___) => Week6RelieveSliderScreen(
+                        selectedBehavior: widget.selectedBehavior,
+                        behaviorType: widget.behaviorType,
+                        remainingBehaviors: widget.remainingBehaviors,
+                        allBehaviorList: widget.allBehaviorList,
+                      ),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ),
+              );
+            }
           },
         ),
       ),
