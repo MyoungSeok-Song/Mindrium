@@ -4,6 +4,7 @@ import 'week4_concentration_screen.dart';
 import 'week4_anxiety_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:gad_app_team/data/user_provider.dart';
+import 'week4_finish_screen.dart';
 
 class Week4SkipChoiceScreen extends StatelessWidget {
   final List<String> allBList;
@@ -12,6 +13,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
   final bool isFromAfterSud;
   final List<String>? existingAlternativeThoughts;
   final String? abcId;
+  final int loopCount; // 추가
 
   const Week4SkipChoiceScreen({
     super.key,
@@ -21,6 +23,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
     this.isFromAfterSud = false,
     this.existingAlternativeThoughts,
     this.abcId,
+    this.loopCount = 1, // 기본값 1
   });
 
   @override
@@ -114,6 +117,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                                 beforeSud: beforeSud,
                                                 allBList: allBList,
                                                 abcId: abcId,
+                                                loopCount: loopCount, // 반드시 전달
                                               ),
                                           transitionDuration: Duration.zero,
                                           reverseTransitionDuration:
@@ -142,12 +146,12 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 16),
                               ],
+                              // 불안 생각 추가 버튼 (항상 보임)
                               SizedBox(
                                 width: double.infinity,
                                 height: 56,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    // 새로운 불안 생각 추가
                                     Navigator.pushReplacement(
                                       context,
                                       PageRouteBuilder(
@@ -156,6 +160,8 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                               beforeSud: beforeSud,
                                               existingAlternativeThoughts:
                                                   existingAlternativeThoughts,
+                                              loopCount:
+                                                  loopCount + 1, // 루프 반복에서만 +1
                                             ),
                                         transitionDuration: Duration.zero,
                                         reverseTransitionDuration:
@@ -186,6 +192,39 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              if (loopCount >= 2) ...[
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 56,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (_) => const Week4FinishScreen(),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Color(0xFF5B3EFF),
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      elevation: 0,
+                                    ),
+                                    child: const Text(
+                                      '4주차 마무리하기',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ],
                           ),
                         ),

@@ -6,7 +6,8 @@ import 'package:gad_app_team/widgets/navigation_button.dart';
 import 'package:gad_app_team/features/4th_treatment/week4_before_sud_screen.dart';
 
 class Week4ImaginationScreen extends StatefulWidget {
-  const Week4ImaginationScreen({super.key});
+  final int loopCount;
+  const Week4ImaginationScreen({super.key, this.loopCount = 1});
 
   @override
   State<Week4ImaginationScreen> createState() => _Week4ImaginationScreenState();

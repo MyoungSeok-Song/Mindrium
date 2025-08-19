@@ -10,7 +10,7 @@ class Week4VisualScreen extends StatefulWidget {
     super.key,
     required this.previousChips,
     required this.alternativeChips,
-    this.abcId
+    this.abcId,
   });
 
   @override

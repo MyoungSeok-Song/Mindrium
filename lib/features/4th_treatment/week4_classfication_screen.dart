@@ -15,6 +15,7 @@ class Week4ClassificationScreen extends StatefulWidget {
   final bool isFromAnxietyScreen;
   final List<String>? existingAlternativeThoughts;
   final String? abcId;
+  final int loopCount;
 
   const Week4ClassificationScreen({
     super.key,
@@ -24,7 +25,8 @@ class Week4ClassificationScreen extends StatefulWidget {
     this.alternativeThoughts,
     this.isFromAnxietyScreen = false,
     this.existingAlternativeThoughts,
-    this.abcId
+    this.abcId,
+    this.loopCount = 1,
   });
 
   @override
@@ -101,12 +103,13 @@ class Week4ClassificationScreenState extends State<Week4ClassificationScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception('로그인 정보 없음');
 
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .collection('abc_models')
-          .doc(abcId)
-          .get();
+      final doc =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .collection('abc_models')
+              .doc(abcId)
+              .get();
 
       if (!doc.exists) {
         if (!mounted) return;
@@ -184,7 +187,8 @@ class Week4ClassificationScreenState extends State<Week4ClassificationScreen> {
               alternativeThoughts: widget.alternativeThoughts,
               isFromAnxietyScreen: isFromAnxietyScreen,
               existingAlternativeThoughts: widget.existingAlternativeThoughts,
-              abcId: widget.abcId
+              abcId: widget.abcId,
+              loopCount: widget.loopCount,
             ),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,

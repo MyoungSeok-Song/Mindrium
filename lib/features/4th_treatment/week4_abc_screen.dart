@@ -30,12 +30,9 @@ class _CrayonHighlightPainter extends CustomPainter {
 class Week4AbcScreen extends StatefulWidget {
   final String? abcId;
   final int? sud;
+  final int loopCount;
 
-  const Week4AbcScreen({
-    super.key,
-    this.abcId,
-    this.sud
-    });
+  const Week4AbcScreen({super.key, this.abcId, this.sud, this.loopCount = 1});
 
   @override
   State<Week4AbcScreen> createState() => _Week4AbcScreenState();
@@ -46,7 +43,6 @@ class _Week4AbcScreenState extends State<Week4AbcScreen> {
   bool _isLoading = true;
   String? _error;
   List<String> _bList = [];
-
 
   @override
   void initState() {
@@ -118,12 +114,13 @@ class _Week4AbcScreenState extends State<Week4AbcScreen> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception('로그인 정보 없음');
 
-      final doc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .collection('abc_models')
-          .doc(abcId)
-          .get();
+      final doc =
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .collection('abc_models')
+              .doc(abcId)
+              .get();
 
       if (!doc.exists) {
         if (!mounted) return;
@@ -175,7 +172,6 @@ class _Week4AbcScreenState extends State<Week4AbcScreen> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -385,9 +381,9 @@ class _Week4AbcScreenState extends State<Week4AbcScreen> {
             if (_bList.isEmpty) {
               setState(() => _isLoading = false);
               if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('B(생각) 데이터가 없습니다.')),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('B(생각) 데이터가 없습니다.')));
               return;
             }
 
@@ -395,12 +391,14 @@ class _Week4AbcScreenState extends State<Week4AbcScreen> {
             Navigator.push(
               context,
               PageRouteBuilder(
-                pageBuilder: (_, __, ___) => Week4ConcentrationScreen(
-                  bListInput: _bList,
-                  beforeSud: beforeSudValue,
-                  allBList: _bList,
-                  abcId: widget.abcId,
-                ),
+                pageBuilder:
+                    (_, __, ___) => Week4ConcentrationScreen(
+                      bListInput: _bList,
+                      beforeSud: beforeSudValue,
+                      allBList: _bList,
+                      abcId: widget.abcId,
+                      loopCount: widget.loopCount,
+                    ),
                 transitionDuration: Duration.zero,
                 reverseTransitionDuration: Duration.zero,
               ),

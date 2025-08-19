@@ -7,7 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Week4BeforeSudScreen extends StatefulWidget {
-  const Week4BeforeSudScreen({super.key});
+  final int loopCount;
+
+  const Week4BeforeSudScreen({super.key, this.loopCount = 1});
 
   @override
   State<Week4BeforeSudScreen> createState() => _Week4BeforeSudScreenState();

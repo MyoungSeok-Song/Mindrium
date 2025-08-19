@@ -7,7 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:gad_app_team/data/user_provider.dart';
 
 class Week4Screen extends StatefulWidget {
-  const Week4Screen({super.key});
+  final int loopCount;
+
+  const Week4Screen({super.key, this.loopCount = 1});
 
   @override
   State<Week4Screen> createState() => _Week4ScreenState();
@@ -62,10 +64,12 @@ class _Week4ScreenState extends State<Week4Screen> {
                 Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => Week4AbcScreen(
-                      abcId : abcId,
-                      sud: sud
-                    ),
+                    pageBuilder:
+                        (_, __, ___) => Week4AbcScreen(
+                          abcId: abcId,
+                          sud: sud,
+                          loopCount: widget.loopCount,
+                        ),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero,
                   ),

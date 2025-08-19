@@ -12,6 +12,7 @@ class Week4AlternativeThoughtsScreen extends StatefulWidget {
   final bool isFromAnxietyScreen;
   final List<String> originalBList;
   final String? abcId;
+  final int loopCount;
 
   const Week4AlternativeThoughtsScreen({
     super.key,
@@ -22,7 +23,8 @@ class Week4AlternativeThoughtsScreen extends StatefulWidget {
     this.existingAlternativeThoughts,
     this.isFromAnxietyScreen = false,
     this.originalBList = const [],
-    this.abcId
+    this.abcId,
+    this.loopCount = 1,
   });
 
   @override
@@ -359,23 +361,29 @@ class _Week4AlternativeThoughtsScreenState
                             '/alt_thought',
                             arguments: {
                               'abcId': widget.abcId,
+                              'loopCount': widget.loopCount,
                             },
                           );
                         } else {
                           Navigator.push(
                             context,
                             PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => Week4AlternativeThoughtsDisplayScreen(
-                                alternativeThoughts: _chips,
-                                previousB: bToShow,
-                                beforeSud: widget.beforeSud ?? 0,
-                                remainingBList: widget.remainingBList,
-                                allBList: widget.allBList,
-                                existingAlternativeThoughts: widget.existingAlternativeThoughts,
-                                isFromAnxietyScreen: widget.isFromAnxietyScreen,
-                                originalBList: widget.originalBList,
-                                abcId: widget.abcId,
-                              ),
+                              pageBuilder:
+                                  (_, __, ___) =>
+                                      Week4AlternativeThoughtsDisplayScreen(
+                                        alternativeThoughts: _chips,
+                                        previousB: bToShow,
+                                        beforeSud: widget.beforeSud ?? 0,
+                                        remainingBList: widget.remainingBList,
+                                        allBList: widget.allBList,
+                                        existingAlternativeThoughts:
+                                            widget.existingAlternativeThoughts,
+                                        isFromAnxietyScreen:
+                                            widget.isFromAnxietyScreen,
+                                        originalBList: widget.originalBList,
+                                        abcId: widget.abcId,
+                                        loopCount: widget.loopCount,
+                                      ),
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero,
                             ),

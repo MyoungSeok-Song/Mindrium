@@ -15,6 +15,7 @@ class Week4AfterSudScreen extends StatefulWidget {
   final List<String> alternativeThoughts;
   final bool isFromAnxietyScreen;
   final List<String> originalBList;
+  final int loopCount; // 추가
 
   const Week4AfterSudScreen({
     super.key,
@@ -25,6 +26,7 @@ class Week4AfterSudScreen extends StatefulWidget {
     required this.alternativeThoughts,
     this.isFromAnxietyScreen = false,
     this.originalBList = const [],
+    this.loopCount = 1, // 기본값 1
   });
 
   @override
@@ -124,15 +126,15 @@ class _Week4AfterSudScreenState extends State<Week4AfterSudScreen> {
                   ...widget.allBList.where(
                     (thought) => !_originalBList.contains(thought),
                   ),
-                ], // 기존 걱정일기 생각들 + 추가한 불안한 생각들 (중복 제거)
-                alternativeChips: _allAlternativeThoughts, // 모든 대체 생각들
+                ],
+                alternativeChips: _allAlternativeThoughts,
               ),
           transitionDuration: Duration.zero,
           reverseTransitionDuration: Duration.zero,
         ),
       );
     } else {
-      // SUD가 낮아지지 않았으면 Week4SkipChoiceScreen으로 이동
+      // SUD가 낮아지지 않았으면 Week4SkipChoiceScreen으로 이동 (loopCount 증가 X)
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
@@ -142,8 +144,8 @@ class _Week4AfterSudScreenState extends State<Week4AfterSudScreen> {
                 beforeSud: widget.beforeSud,
                 remainingBList: widget.remainingBList,
                 isFromAfterSud: true,
-                existingAlternativeThoughts:
-                    _allAlternativeThoughts, // 모든 대체 생각들 전달
+                existingAlternativeThoughts: _allAlternativeThoughts,
+                loopCount: widget.loopCount, // 반드시 그대로 전달
               ),
           transitionDuration: Duration.zero,
           reverseTransitionDuration: Duration.zero,
@@ -154,6 +156,7 @@ class _Week4AfterSudScreenState extends State<Week4AfterSudScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     final Color trackColor =
         _sud <= 2
             ? Colors.green

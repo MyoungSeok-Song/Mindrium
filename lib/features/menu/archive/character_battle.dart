@@ -150,7 +150,7 @@ class _PokemonBattleDeletePageState extends State<PokemonBattleDeletePage>
                       child: Image.asset(
                         bgImage,
                         fit: BoxFit.cover,
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withValues(alpha: 0.4),
                         colorBlendMode: BlendMode.darken,
                       ),
                     ),

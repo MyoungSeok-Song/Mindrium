@@ -15,6 +15,7 @@ class Week4AlternativeThoughtsDisplayScreen extends StatefulWidget {
   final bool isFromAnxietyScreen;
   final List<String> originalBList;
   final String? abcId;
+  final int loopCount;
 
   const Week4AlternativeThoughtsDisplayScreen({
     super.key,
@@ -26,7 +27,8 @@ class Week4AlternativeThoughtsDisplayScreen extends StatefulWidget {
     this.existingAlternativeThoughts,
     this.isFromAnxietyScreen = false,
     this.originalBList = const [],
-    this.abcId
+    this.abcId,
+    this.loopCount = 1,
   });
 
   @override
@@ -38,6 +40,7 @@ class _Week4AlternativeThoughtsDisplayScreenState
     extends State<Week4AlternativeThoughtsDisplayScreen> {
   bool _isNextEnabled = false;
   int _secondsLeft = 5;
+  bool _showMainText = true; // 검정 안내문 먼저, 이후 보라 안내문
 
   List<String> _removeDuplicates(List<String> list) {
     final uniqueList = <String>[];
@@ -76,6 +79,11 @@ class _Week4AlternativeThoughtsDisplayScreenState
   @override
   Widget build(BuildContext context) {
     final userName = Provider.of<UserProvider>(context, listen: false).userName;
+    final hasAlt = widget.alternativeThoughts.isNotEmpty;
+    final mainText =
+        hasAlt
+            ? "'${widget.previousB}' 생각에 대해 '${widget.alternativeThoughts.join(', ')} '(이)라는 도움이 되는 생각을 작성해주셨네요. 잘 진행해주시고 계십니다!"
+            : "'${widget.previousB}' 생각에 대한\n도움이 되는 생각들을 확인해보세요.";
     return Scaffold(
       backgroundColor: const Color(0xFFFBF8FF),
       appBar: const CustomAppBar(title: '4주차 - 인지 왜곡 찾기'),
@@ -102,10 +110,10 @@ class _Week4AlternativeThoughtsDisplayScreenState
                     Text(
                       '$userName님',
                       style: const TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF5B3EFF),
-                        letterSpacing: 1.2,
+                        letterSpacing: 1.1,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -118,27 +126,27 @@ class _Week4AlternativeThoughtsDisplayScreenState
                       ),
                     ),
                     const SizedBox(height: 32),
-                    Text(
-                      widget.alternativeThoughts.isNotEmpty
-                          ? "'${widget.previousB}' 생각에 대해 '${widget.alternativeThoughts.join(', ')} '(라)는 도움이 되는 생각을 작성해주셨네요. 잘 진행해주시고 계십니다!"
-                          : "'${widget.previousB}' 생각에 대한\n도움이 되는 생각들을 확인해보세요.",
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                        height: 1.6,
-                        letterSpacing: 0.2,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
+                    if (_showMainText)
+                      Text(
+                        mainText,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          height: 1.5,
+                        ),
+                        textAlign: TextAlign.center,
+                      )
+                    else
+                    // 보라 안내문(subText) 완전히 제거
                     if (widget.alternativeThoughts.isNotEmpty) ...[
                       const SizedBox(height: 16),
                       Text(
                         '도움이 되는 생각을 해봤을 때 처음 들었던 불안한 생각을 어느정도 강하게 믿고있으신지 다시 한번 평가해볼게요.',
                         style: const TextStyle(
-                          fontSize: 17,
+                          fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xFF5B3EFF),
+                          color: Colors.black,
                           height: 1.4,
                         ),
                         textAlign: TextAlign.center,
@@ -168,31 +176,36 @@ class _Week4AlternativeThoughtsDisplayScreenState
           onNext:
               _isNextEnabled
                   ? () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder:
-                            (_, __, ___) => Week4AfterAgreementScreen(
-                              previousB: widget.previousB,
-                              beforeSud: widget.beforeSud,
-                              remainingBList: widget.remainingBList,
-                              allBList: widget.allBList,
-                              alternativeThoughts: _removeDuplicates([
-                                ...?widget.existingAlternativeThoughts,
-                                ...widget.alternativeThoughts,
-                              ]),
-                              isFromAnxietyScreen: widget.isFromAnxietyScreen,
-                              originalBList: widget.originalBList,
-                              existingAlternativeThoughts: _removeDuplicates([
-                                ...?widget.existingAlternativeThoughts,
-                                ...widget.alternativeThoughts,
-                              ]),
-                              abcId: widget.abcId
-                            ),
-                        transitionDuration: Duration.zero,
-                        reverseTransitionDuration: Duration.zero,
-                      ),
-                    );
+                    if (_showMainText) {
+                      setState(() => _showMainText = false);
+                    } else {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (_, __, ___) => Week4AfterAgreementScreen(
+                                previousB: widget.previousB,
+                                beforeSud: widget.beforeSud,
+                                remainingBList: widget.remainingBList,
+                                allBList: widget.allBList,
+                                alternativeThoughts: _removeDuplicates([
+                                  ...?widget.existingAlternativeThoughts,
+                                  ...widget.alternativeThoughts,
+                                ]),
+                                isFromAnxietyScreen: widget.isFromAnxietyScreen,
+                                originalBList: widget.originalBList,
+                                existingAlternativeThoughts: _removeDuplicates([
+                                  ...?widget.existingAlternativeThoughts,
+                                  ...widget.alternativeThoughts,
+                                ]),
+                                abcId: widget.abcId,
+                                loopCount: widget.loopCount,
+                              ),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      );
+                    }
                   }
                   : null,
         ),

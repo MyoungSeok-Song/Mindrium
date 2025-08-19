@@ -12,6 +12,7 @@ class Week4ConcentrationScreen extends StatefulWidget {
   final int beforeSud;
   final List<String> allBList;
   final String? abcId;
+  final int loopCount;
 
   const Week4ConcentrationScreen({
     super.key,
@@ -19,6 +20,7 @@ class Week4ConcentrationScreen extends StatefulWidget {
     required this.beforeSud,
     required this.allBList,
     this.abcId,
+    this.loopCount = 1,
   });
 
   @override
@@ -142,35 +144,6 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
     });
   }
 
-  String _getFirstBelief(dynamic belief) {
-    if (belief == null) return '';
-
-    // 문자열인 경우 쉼표로 분리하여 첫번째 요소 반환
-    if (belief is String) {
-      final parts =
-          belief
-              .split(',')
-              .map((e) => e.trim())
-              .where((e) => e.isNotEmpty)
-              .toList();
-      return parts.isNotEmpty ? parts.first : '';
-    }
-
-    // 리스트인 경우 첫번째 요소 반환
-    if (belief is List) {
-      return belief.isNotEmpty ? belief.first.toString() : '';
-    }
-
-    // 기타 타입은 문자열로 변환 후 처리
-    final beliefStr = belief.toString();
-    final parts =
-        beliefStr
-            .split(',')
-            .map((e) => e.trim())
-            .where((e) => e.isNotEmpty)
-            .toList();
-    return parts.isNotEmpty ? parts.first : '';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +199,7 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                             if (_showSituation)
                               Text(
                                 _abcModel != null
-                                    ? "'${_abcModel!['activatingEvent'] ?? ''}' (라는) 상황을 잠시 집중해보겠습니다."
+                                    ? "'${_abcModel!['activatingEvent'] ?? ''}' (이)라는 상황을 잠시 집중해보겠습니다."
                                     : '이때의 상황을 자세하게 집중해 보세요.',
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -292,6 +265,7 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                                 beforeSud: widget.beforeSud,
                                 allBList: widget.allBList,
                                 abcId: widget.abcId,
+                                loopCount: widget.loopCount,
                               ),
                           transitionDuration: Duration.zero,
                           reverseTransitionDuration: Duration.zero,

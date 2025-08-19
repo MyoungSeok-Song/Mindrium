@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gad_app_team/widgets/custom_appbar.dart';
-import 'week4_classfication_screen.dart';
 import 'week4_alternative_thoughts.dart';
 import 'package:provider/provider.dart';
 import 'package:gad_app_team/data/user_provider.dart';
@@ -29,6 +28,7 @@ class Week4ClassificationResultScreen extends StatelessWidget {
   final bool isFromAnxietyScreen;
   final List<String>? existingAlternativeThoughts;
   final String? abcId;
+  final int loopCount;
 
   const Week4ClassificationResultScreen({
     super.key,
@@ -41,10 +41,12 @@ class Week4ClassificationResultScreen extends StatelessWidget {
     this.isFromAnxietyScreen = false,
     this.existingAlternativeThoughts,
     this.abcId,
+    this.loopCount = 1,
   });
 
   @override
   Widget build(BuildContext context) {
+    
     final String mainThought =
         (bList != null && bList!.isNotEmpty) ? bList!.last : '';
 
@@ -178,6 +180,7 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                               originalBList:
                                                   safeAllBList, // 모든 B 생각들 (원래 + 추가한 불안한 생각들)
                                               abcId: abcId_,
+                                              loopCount: loopCount,
                                             ),
                                         transitionDuration: Duration.zero,
                                         reverseTransitionDuration:
@@ -218,7 +221,10 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                           Navigator.pushReplacementNamed(
                                             context,
                                             '/after_sud',
-                                            arguments: {'abcId': abcId_},
+                                            arguments: {
+                                              'abcId': abcId_,
+                                              'loopCount': loopCount,
+                                            },
                                           );
                                         } else {
                                           // abcId가 없으면 기존 화면으로 직접 이동
@@ -244,6 +250,8 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                                     alternativeThoughts:
                                                         alternativeThoughts ??
                                                         [],
+                                                    loopCount:
+                                                        loopCount, // 반드시 widget.loopCount로 전달
                                                   ),
                                               transitionDuration: Duration.zero,
                                               reverseTransitionDuration:
@@ -264,6 +272,8 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                                       remainingBList:
                                                           safeRemainingBList,
                                                       abcId: abcId,
+                                                      loopCount:
+                                                          1, // 최초 진입은 반드시 1로 고정
                                                     ),
                                             transitionDuration: Duration.zero,
                                             reverseTransitionDuration:
@@ -278,15 +288,19 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                             context,
                                             PageRouteBuilder(
                                               pageBuilder:
-                                                  (_, __, ___) =>
-                                                      Week4ConcentrationScreen(
-                                                        bListInput:
-                                                            safeRemainingBList,
-                                                        beforeSud:
-                                                            safeBeforeSud,
-                                                        allBList: safeAllBList,
-                                                        abcId: abcId_,
-                                                      ),
+                                                  (
+                                                    _,
+                                                    __,
+                                                    ___,
+                                                  ) => Week4ConcentrationScreen(
+                                                    bListInput:
+                                                        safeRemainingBList,
+                                                    beforeSud: safeBeforeSud,
+                                                    allBList: safeAllBList,
+                                                    abcId: abcId_,
+                                                    loopCount:
+                                                        1, // 최초 진입은 반드시 1로 고정
+                                                  ),
                                               transitionDuration: Duration.zero,
                                               reverseTransitionDuration:
                                                   Duration.zero,
@@ -297,15 +311,19 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                             context,
                                             PageRouteBuilder(
                                               pageBuilder:
-                                                  (_, __, ___) =>
-                                                      Week4ConcentrationScreen(
-                                                        bListInput:
-                                                            safeRemainingBList,
-                                                        beforeSud:
-                                                            safeBeforeSud,
-                                                        allBList: safeAllBList,
-                                                        abcId: abcId,
-                                                      ),
+                                                  (
+                                                    _,
+                                                    __,
+                                                    ___,
+                                                  ) => Week4ConcentrationScreen(
+                                                    bListInput:
+                                                        safeRemainingBList,
+                                                    beforeSud: safeBeforeSud,
+                                                    allBList: safeAllBList,
+                                                    abcId: abcId,
+                                                    loopCount:
+                                                        1, // 최초 진입은 반드시 1로 고정
+                                                  ),
                                               transitionDuration: Duration.zero,
                                               reverseTransitionDuration:
                                                   Duration.zero,

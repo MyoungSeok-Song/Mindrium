@@ -622,7 +622,7 @@ class _PhysicsFishState extends State<_PhysicsFish>
               height: kRowHeight,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.10),
+                color: Colors.white.withValues(alpha: 0.10),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: Colors.white24, width: 1),
                 boxShadow: const [
@@ -700,8 +700,8 @@ class _LightRaysPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final shader = LinearGradient(
       colors: [
-        Colors.white.withOpacity(0.18),
-        Colors.white.withOpacity(0.0),
+        Colors.white.withValues(alpha: 0.18),
+        Colors.white.withValues(alpha: 0.0),
       ],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
@@ -748,7 +748,7 @@ class _WavesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.06)
+      ..color = Colors.white.withValues(alpha: 0.06)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
 
@@ -829,7 +829,7 @@ class _Bubble extends StatelessWidget {
         height: radius * 2,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.white.withOpacity(0.18),
+          color: Colors.white.withValues(alpha: 0.18),
           border: Border.all(color: Colors.white24, width: 0.8),
         ),
       ),

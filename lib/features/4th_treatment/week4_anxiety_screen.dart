@@ -7,12 +7,14 @@ class Week4AnxietyScreen extends StatefulWidget {
   final List<String>? bList;
   final int beforeSud;
   final List<String>? existingAlternativeThoughts;
+  final int loopCount;
 
   const Week4AnxietyScreen({
     super.key,
     this.bList,
     this.beforeSud = 0,
     this.existingAlternativeThoughts,
+    this.loopCount = 1,
   });
 
   @override
@@ -329,6 +331,7 @@ class _Week4AnxietyScreenState extends State<Week4AnxietyScreen> {
                                       existingAlternativeThoughts:
                                           widget.existingAlternativeThoughts ??
                                           [], // 기존 대체 생각들 전달
+                                      loopCount: widget.loopCount, // 반드시 그대로 전달
                                     ),
                             transitionDuration: Duration.zero,
                             reverseTransitionDuration: Duration.zero,

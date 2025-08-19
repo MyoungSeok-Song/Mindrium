@@ -16,6 +16,7 @@ class Week4AfterAgreementScreen extends StatefulWidget {
   final List<String> originalBList;
   final List<String>? existingAlternativeThoughts;
   final String? abcId;
+  final int loopCount;
 
   const Week4AfterAgreementScreen({
     super.key,
@@ -27,7 +28,8 @@ class Week4AfterAgreementScreen extends StatefulWidget {
     this.isFromAnxietyScreen = false,
     this.originalBList = const [],
     this.existingAlternativeThoughts,
-    this.abcId
+    this.abcId,
+    this.loopCount = 1,
   });
 
   @override
@@ -209,27 +211,27 @@ class _Week4AfterAgreementScreenState extends State<Week4AfterAgreementScreen> {
                     Navigator.pushNamed(
                       context,
                       '/after_sud',
-                      arguments: {
-                        'abcId': widget.abcId,
-                      },
+                      arguments: {'abcId': widget.abcId},
                     );
                   } else {
                     // ② abcId가 없으면: 기존 로직(Week4AfterSudScreen)으로 이동
                     Navigator.push(
                       context,
                       PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => Week4AfterSudScreen(
-                          beforeSud: widget.beforeSud,
-                          currentB: _currentB,
-                          remainingBList: widget.remainingBList,
-                          allBList: widget.allBList,
-                          alternativeThoughts: _removeDuplicates([
-                            ...?widget.existingAlternativeThoughts,
-                            ...widget.alternativeThoughts,
-                          ]),
-                          isFromAnxietyScreen: widget.isFromAnxietyScreen,
-                          originalBList: widget.originalBList,
-                        ),
+                        pageBuilder:
+                            (_, __, ___) => Week4AfterSudScreen(
+                              beforeSud: widget.beforeSud,
+                              currentB: _currentB,
+                              remainingBList: widget.remainingBList,
+                              allBList: widget.allBList,
+                              alternativeThoughts: _removeDuplicates([
+                                ...?widget.existingAlternativeThoughts,
+                                ...widget.alternativeThoughts,
+                              ]),
+                              isFromAnxietyScreen: widget.isFromAnxietyScreen,
+                              originalBList: widget.originalBList,
+                              loopCount: widget.loopCount, // 반드시 전달
+                            ),
                         transitionDuration: Duration.zero,
                         reverseTransitionDuration: Duration.zero,
                       ),
@@ -249,7 +251,7 @@ class _Week4AfterAgreementScreenState extends State<Week4AfterAgreementScreen> {
                               ...?widget.existingAlternativeThoughts,
                               ...widget.alternativeThoughts,
                             ]),
-                            abcId: widget.abcId
+                            abcId: widget.abcId,
                           ),
                       transitionDuration: Duration.zero,
                       reverseTransitionDuration: Duration.zero,

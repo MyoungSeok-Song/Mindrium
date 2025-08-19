@@ -259,7 +259,7 @@ class AbcStreamList extends StatelessWidget {
 
                               final reminderText = (reminderMinutes == null)
                                   ? '반복시간 없음'
-                                  : '반복 (${reminderMinutes}분)';
+                                  : '반복 ($reminderMinutes분)';
 
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
