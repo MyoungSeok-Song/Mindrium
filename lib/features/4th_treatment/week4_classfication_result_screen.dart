@@ -46,7 +46,6 @@ class Week4ClassificationResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final String mainThought =
         (bList != null && bList!.isNotEmpty) ? bList!.last : '';
 
@@ -212,125 +211,32 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                   height: 56,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // 대체생각을 하나라도 작성했으면 바로 after sud로 이동
-                                      if (alternativeThoughts != null &&
-                                          alternativeThoughts!.isNotEmpty) {
-                                        if (abcId_ != null &&
-                                            abcId_.isNotEmpty) {
-                                          // abcId가 있으면 named route로 이동
-                                          Navigator.pushReplacementNamed(
-                                            context,
-                                            '/after_sud',
-                                            arguments: {
-                                              'abcId': abcId_,
-                                              'loopCount': loopCount,
-                                            },
-                                          );
-                                        } else {
-                                          // abcId가 없으면 기존 화면으로 직접 이동
-                                          Navigator.pushReplacement(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder:
-                                                  (
-                                                    _,
-                                                    __,
-                                                    ___,
-                                                  ) => Week4AfterSudScreen(
-                                                    beforeSud: safeBeforeSud,
-                                                    currentB:
-                                                        (bList != null &&
-                                                                bList!
-                                                                    .isNotEmpty)
-                                                            ? bList!.last
-                                                            : '',
-                                                    remainingBList:
-                                                        safeRemainingBList,
-                                                    allBList: safeAllBList,
-                                                    alternativeThoughts:
-                                                        alternativeThoughts ??
-                                                        [],
-                                                    loopCount:
-                                                        loopCount, // 반드시 widget.loopCount로 전달
-                                                  ),
-                                              transitionDuration: Duration.zero,
-                                              reverseTransitionDuration:
-                                                  Duration.zero,
-                                            ),
-                                          );
-                                        }
-                                      } else if (safeRemainingBList.isEmpty) {
-                                        // 대체생각도 없고 남은 생각도 없으면 skip choice 화면으로 이동
-                                        Navigator.pushReplacement(
-                                          context,
-                                          PageRouteBuilder(
-                                            pageBuilder:
-                                                (_, __, ___) =>
-                                                    Week4SkipChoiceScreen(
-                                                      allBList: safeAllBList,
-                                                      beforeSud: safeBeforeSud,
-                                                      remainingBList:
-                                                          safeRemainingBList,
-                                                      abcId: abcId,
-                                                      loopCount:
-                                                          1, // 최초 진입은 반드시 1로 고정
-                                                    ),
-                                            transitionDuration: Duration.zero,
-                                            reverseTransitionDuration:
-                                                Duration.zero,
-                                          ),
-                                        );
-                                      } else {
-                                        // 남은 B가 있으면 반드시 Week4ConcentrationScreen을 먼저 거침
-                                        if (abcId_ != null &&
-                                            abcId_.isNotEmpty) {
-                                          Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder:
-                                                  (
-                                                    _,
-                                                    __,
-                                                    ___,
-                                                  ) => Week4ConcentrationScreen(
-                                                    bListInput:
-                                                        safeRemainingBList,
-                                                    beforeSud: safeBeforeSud,
-                                                    allBList: safeAllBList,
-                                                    abcId: abcId_,
-                                                    loopCount:
-                                                        1, // 최초 진입은 반드시 1로 고정
-                                                  ),
-                                              transitionDuration: Duration.zero,
-                                              reverseTransitionDuration:
-                                                  Duration.zero,
-                                            ),
-                                          );
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder:
-                                                  (
-                                                    _,
-                                                    __,
-                                                    ___,
-                                                  ) => Week4ConcentrationScreen(
-                                                    bListInput:
-                                                        safeRemainingBList,
-                                                    beforeSud: safeBeforeSud,
-                                                    allBList: safeAllBList,
-                                                    abcId: abcId,
-                                                    loopCount:
-                                                        1, // 최초 진입은 반드시 1로 고정
-                                                  ),
-                                              transitionDuration: Duration.zero,
-                                              reverseTransitionDuration:
-                                                  Duration.zero,
-                                            ),
-                                          );
-                                        }
-                                      }
+                                      debugPrint(
+                                        'onPressed safeRemainingBList: ' +
+                                            safeRemainingBList.toString(),
+                                      );
+                                      // 기존 alternativeThoughts, existingAlternativeThoughts를 safe하게 합쳐서 전달
+                                      final allAltThoughts = _removeDuplicates([
+                                        ...?existingAlternativeThoughts,
+                                        ...?alternativeThoughts,
+                                      ]);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (_) => Week4ConcentrationScreen(
+                                                bListInput: safeRemainingBList,
+                                                beforeSud: safeBeforeSud,
+                                                allBList: safeAllBList,
+                                                abcId: abcId,
+                                                loopCount: loopCount,
+                                                alternativeThoughts:
+                                                    allAltThoughts,
+                                                existingAlternativeThoughts:
+                                                    allAltThoughts,
+                                              ),
+                                        ),
+                                      );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,

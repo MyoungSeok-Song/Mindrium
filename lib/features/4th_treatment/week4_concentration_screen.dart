@@ -6,6 +6,7 @@ import 'package:gad_app_team/widgets/navigation_button.dart';
 import 'package:gad_app_team/features/4th_treatment/week4_classfication_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gad_app_team/features/4th_treatment/week4_after_sud_screen.dart';
 
 class Week4ConcentrationScreen extends StatefulWidget {
   final List<String> bListInput;
@@ -13,6 +14,8 @@ class Week4ConcentrationScreen extends StatefulWidget {
   final List<String> allBList;
   final String? abcId;
   final int loopCount;
+  final List<String>? existingAlternativeThoughts;
+  final List<String>? alternativeThoughts;
 
   const Week4ConcentrationScreen({
     super.key,
@@ -21,6 +24,8 @@ class Week4ConcentrationScreen extends StatefulWidget {
     required this.allBList,
     this.abcId,
     this.loopCount = 1,
+    this.existingAlternativeThoughts,
+    this.alternativeThoughts,
   });
 
   @override
@@ -144,9 +149,30 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
+    debugPrint(
+      'Week4ConcentrationScreen bListInput: ' + widget.bListInput.toString(),
+    );
+    if (widget.bListInput.isEmpty) {
+      Future.microtask(() {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder:
+                (_) => Week4AfterSudScreen(
+                  beforeSud: widget.beforeSud,
+                  currentB: '',
+                  remainingBList: const [],
+                  allBList: widget.allBList,
+                  alternativeThoughts: const [],
+                  loopCount: widget.loopCount,
+                ),
+          ),
+        );
+      });
+      return const SizedBox.shrink();
+    }
     final userName = Provider.of<UserProvider>(context, listen: false).userName;
     // 현재 보여줄 B(생각) 추출
     final currentThought =
@@ -199,7 +225,7 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                             if (_showSituation)
                               Text(
                                 _abcModel != null
-                                    ? "'${_abcModel!['activatingEvent'] ?? ''}' (이)라는 상황을 잠시 집중해보겠습니다."
+                                    ? "'${_abcModel!['activatingEvent'] ?? ''}' (이) 상황을 잠시 집중해보겠습니다."
                                     : '이때의 상황을 자세하게 집중해 보세요.',
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -260,12 +286,19 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                         PageRouteBuilder(
                           pageBuilder:
                               (_, __, ___) => Week4ClassificationScreen(
-                                bListInput:
-                                    widget.bListInput, // 두 번째 생각이 정상적으로 보이도록 수정
+                                bListInput: widget.bListInput,
                                 beforeSud: widget.beforeSud,
                                 allBList: widget.allBList,
                                 abcId: widget.abcId,
                                 loopCount: widget.loopCount,
+                                alternativeThoughts: [
+                                  ...?widget.existingAlternativeThoughts,
+                                  ...?widget.alternativeThoughts,
+                                ],
+                                existingAlternativeThoughts: [
+                                  ...?widget.existingAlternativeThoughts,
+                                  ...?widget.alternativeThoughts,
+                                ],
                               ),
                           transitionDuration: Duration.zero,
                           reverseTransitionDuration: Duration.zero,
