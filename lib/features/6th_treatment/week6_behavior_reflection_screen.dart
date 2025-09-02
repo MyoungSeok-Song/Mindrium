@@ -4,6 +4,7 @@ import 'package:gad_app_team/widgets/navigation_button.dart';
 import 'package:provider/provider.dart';
 import 'package:gad_app_team/data/user_provider.dart';
 import 'week6_classfication_screen.dart';
+import 'week6_finish_quiz_screen.dart';
 
 class Week6BehaviorReflectionScreen extends StatefulWidget {
   final String selectedBehavior;
@@ -12,6 +13,7 @@ class Week6BehaviorReflectionScreen extends StatefulWidget {
   final double longTermValue; // 장기 슬라이더 값
   final List<String>? remainingBehaviors; // 남은 행동 목록
   final List<String> allBehaviorList; // 전체 행동 목록
+  final List<Map<String, dynamic>>? mismatchedBehaviors; // 일치하지 않은 행동들
 
   const Week6BehaviorReflectionScreen({
     super.key,
@@ -21,6 +23,7 @@ class Week6BehaviorReflectionScreen extends StatefulWidget {
     required this.longTermValue,
     this.remainingBehaviors,
     required this.allBehaviorList,
+    this.mismatchedBehaviors,
   });
 
   @override
@@ -31,6 +34,38 @@ class Week6BehaviorReflectionScreen extends StatefulWidget {
 class _Week6BehaviorReflectionScreenState
     extends State<Week6BehaviorReflectionScreen> {
   bool _showMainText = true;
+  late List<Map<String, dynamic>> _mismatchedBehaviors;
+
+  @override
+  void initState() {
+    super.initState();
+    _mismatchedBehaviors = List.from(widget.mismatchedBehaviors ?? []);
+
+    // 현재 행동이 일치하지 않는지 확인
+    bool isShortTermHigh = widget.shortTermValue == 10;
+    bool isLongTermHigh = widget.longTermValue == 10;
+
+    String actualResult;
+    if (isShortTermHigh && !isLongTermHigh) {
+      actualResult = '불안을 회피하는 행동';
+    } else if (!isShortTermHigh && isLongTermHigh) {
+      actualResult = '불안을 직면하는 행동';
+    } else {
+      actualResult = '중립적인 행동';
+    }
+
+    String userChoice =
+        widget.behaviorType == 'face' ? '불안을 직면하는 행동' : '불안을 회피하는 행동';
+
+    // 사용자 선택과 실제 결과가 다른 경우 일치하지 않은 행동 목록에 추가
+    if (userChoice != actualResult) {
+      _mismatchedBehaviors.insert(0, {
+        'behavior': widget.selectedBehavior,
+        'userChoice': userChoice,
+        'actualResult': actualResult,
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +127,7 @@ class _Week6BehaviorReflectionScreenState
           widget.remainingBehaviors!.isNotEmpty) {
         nextText = '다음 행동도 계속 진행하겠습니다!';
       } else {
-        nextText = '마지막 행동까지 완료했습니다! \n이제 마무리로 일치하지 않았던 행동들을 다시 점검해볼까요?';
+        nextText = '마지막 행동까지 완료했습니다! \n이제 마무리로 모든 행동들을 다시 한번 점검해볼까요?';
       }
     }
 
@@ -213,11 +248,17 @@ class _Week6BehaviorReflectionScreenState
                   ),
                 );
               } else {
-                // 모든 행동을 다 처리했으면 홈 화면으로 이동
-                Navigator.pushNamedAndRemoveUntil(
+                // 모든 행동을 다 처리했으면 Week6FinishQuizScreen으로 이동
+                Navigator.pushReplacement(
                   context,
-                  '/home',
-                  (route) => false,
+                  PageRouteBuilder(
+                    pageBuilder:
+                        (_, __, ___) => Week6FinishQuizScreen(
+                          mismatchedBehaviors: _mismatchedBehaviors,
+                        ),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero,
+                  ),
                 );
               }
             }

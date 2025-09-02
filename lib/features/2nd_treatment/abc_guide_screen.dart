@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gad_app_team/common/constants.dart';
 import 'package:gad_app_team/features/2nd_treatment/abc_input_screen.dart';
 import 'package:gad_app_team/widgets/navigation_button.dart';
+import 'package:gad_app_team/widgets/custom_appbar.dart';
 import 'package:gad_app_team/features/2nd_treatment/week2_screen.dart';
 
 class AbcGuideScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _AbcGuideScreenState extends State<AbcGuideScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFBF8FF),
-      // appBar: const CustomAppBar(title: '2주차 - ABC 모델'),
+      appBar: const CustomAppBar(title: '2주차 - ABC 모델'),
       body: Padding(
         padding: const EdgeInsets.all(AppSizes.padding),
         child: Column(

@@ -40,6 +40,9 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception('로그인 정보 없음');
+
+      print('Fetching ABC model for user: ${user.uid}'); // 디버깅용
+
       final snapshot =
           await FirebaseFirestore.instance
               .collection('users')
@@ -48,19 +51,29 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
               .orderBy('createdAt', descending: true)
               .limit(1)
               .get();
+
+      print('Snapshot docs count: ${snapshot.docs.length}'); // 디버깅용
+
       if (snapshot.docs.isEmpty) {
+        print('No ABC models found'); // 디버깅용
         setState(() {
           _abcModel = null;
           _isLoading = false;
         });
         return;
       }
+
+      final data = snapshot.docs.first.data();
+      print('ABC model data: $data'); // 디버깅용
+
       setState(() {
-        _abcModel = snapshot.docs.first.data();
+        _abcModel = data;
         _isLoading = false;
       });
     } catch (e) {
+      print('Error fetching ABC model: $e'); // 디버깅용
       setState(() {
+        _abcModel = null;
         _isLoading = false;
       });
     }

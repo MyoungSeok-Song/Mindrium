@@ -112,7 +112,7 @@ class _Week4NextThoughtScreenState extends State<Week4NextThoughtScreen> {
         _activatingEvent != null && _activatingEvent!.isNotEmpty
             ? "잘 따라오고 계십니다!\n 다시 '$_activatingEvent' (라)는 상황을 자세하게 상상해 보세요."
             : '이때의 상황을 자세하게 상상해 보세요.';
-    final nextThoughtText = "'$nextThought' 생각에 대해 계속 진행해보겠습니다.";
+    final nextThoughtText = "일기에 작성하셨던 또 다른 생각인 '$nextThought'에 대해 계속 진행해보겠습니다.";
 
     return Scaffold(
       backgroundColor: const Color(0xFFFBF8FF),

@@ -14,6 +14,7 @@ class Week6RelieveResultScreen extends StatefulWidget {
   final double? shortTermValue; // 단기 슬라이더 값 (장기일 때만 사용)
   final List<String>? remainingBehaviors; // 남은 행동 목록
   final List<String> allBehaviorList; // 전체 행동 목록
+  final List<Map<String, dynamic>>? mismatchedBehaviors; // 일치하지 않은 행동들
 
   const Week6RelieveResultScreen({
     super.key,
@@ -24,6 +25,7 @@ class Week6RelieveResultScreen extends StatefulWidget {
     this.shortTermValue, // 단기 슬라이더 값
     this.remainingBehaviors,
     required this.allBehaviorList,
+    this.mismatchedBehaviors,
   });
 
   @override
@@ -173,6 +175,7 @@ class _Week6RelieveResultScreenState extends State<Week6RelieveResultScreen> {
                           longTermValue: widget.sliderValue,
                           remainingBehaviors: widget.remainingBehaviors,
                           allBehaviorList: widget.allBehaviorList,
+                          mismatchedBehaviors: widget.mismatchedBehaviors,
                         ),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero,

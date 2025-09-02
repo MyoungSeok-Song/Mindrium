@@ -241,12 +241,14 @@ class _Week4AnxietyScreenState extends State<Week4AnxietyScreen> {
                                         runSpacing: 8,
                                         children:
                                             _chips
+                                                .asMap()
+                                                .entries
                                                 .map(
-                                                  (text) => Container(
+                                                  (entry) => Container(
                                                     padding:
                                                         const EdgeInsets.symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 10,
+                                                          horizontal: 12,
+                                                          vertical: 8,
                                                         ),
                                                     margin:
                                                         const EdgeInsets.symmetric(
@@ -267,16 +269,57 @@ class _Week4AnxietyScreenState extends State<Week4AnxietyScreen> {
                                                             12,
                                                           ),
                                                     ),
-                                                    child: Text(
-                                                      text,
-                                                      style: const TextStyle(
-                                                        color: Color(
-                                                          0xFF2962F6,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Flexible(
+                                                          child: Text(
+                                                            entry.value,
+                                                            style:
+                                                                const TextStyle(
+                                                                  color: Color(
+                                                                    0xFF2962F6,
+                                                                  ),
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                          ),
                                                         ),
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                        const SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              _chips.removeAt(
+                                                                entry.key,
+                                                              );
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            width: 20,
+                                                            height: 20,
+                                                            decoration:
+                                                                const BoxDecoration(
+                                                                  color: Color(
+                                                                    0xFFCED4DA,
+                                                                  ),
+                                                                  shape:
+                                                                      BoxShape
+                                                                          .circle,
+                                                                ),
+                                                            child: const Icon(
+                                                              Icons.close,
+                                                              size: 14,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 )

@@ -5,7 +5,20 @@ import 'package:gad_app_team/data/user_provider.dart';
 import 'package:gad_app_team/widgets/navigation_button.dart';
 
 class Week4FinishScreen extends StatelessWidget {
-  const Week4FinishScreen({super.key});
+  final int? beforeSud;
+  final int? afterSud;
+  final List<String>? alternativeThoughts;
+  final bool? isFromAfterSud;
+  final int? loopCount;
+
+  const Week4FinishScreen({
+    super.key,
+    this.beforeSud,
+    this.afterSud,
+    this.alternativeThoughts,
+    this.isFromAfterSud,
+    this.loopCount,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +66,14 @@ class Week4FinishScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    const Text(
-                      '아직 불안의 정도가 충분히 낮아지지 않았네요.\n하지만 여기까지 잘 따라와 주신 것만으로도 정말 대단하세요.',
-                      style: TextStyle(
+                    Text(
+                      isFromAfterSud == true &&
+                              beforeSud != null &&
+                              afterSud != null &&
+                              beforeSud! > afterSud!
+                          ? '축하합니다! 불안의 정도가 ${beforeSud}에서 ${afterSud}로 낮아졌네요.\n도움이 되는 생각을 찾아보는 과정을 통해 불안을 줄이는데 성공하셨습니다.'
+                          : '아직 불안의 정도가 충분히 낮아지지 않았네요.\n하지만 여기까지 잘 따라와 주신 것만으로도 정말 대단하세요.',
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Colors.black,
@@ -66,19 +84,7 @@ class Week4FinishScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 32),
                     const Text(
-                      '인지왜곡을 찾는 과정이 처음에는 쉽지 않을 수 있어요.\n조금 더 연습하고, 내 마음을 들여다보는 시간을 가져보면 분명 더 나아질 수 있습니다.',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                        height: 1.5,
-                        letterSpacing: 0.1,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    const SizedBox(height: 32),
-                    const Text(
-                      '앱의 치료 항목에서 3주차 "Self Talk"를 한 번 더 천천히 해보시는 걸 추천드려요.\n\n고생하셨습니다.',
+                      '도움이 되는 생각을 찾는 과정이 처음에는 쉽지 않을 수 있어요.\n조금 더 연습하고, 내 마음을 들여다보는 시간을 가져보면 분명 불안이 줄어들 수 있습니다.\n\n고생하셨습니다.',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,

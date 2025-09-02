@@ -14,11 +14,12 @@ import 'package:gad_app_team/widgets/card_container.dart';
 // ─── Feature Screens ────────────────────────────────────────────────────
 import 'package:gad_app_team/features/1st_treatment/week1_screen.dart';
 import 'package:gad_app_team/features/2nd_treatment/abc_input_screen.dart';
+import 'package:gad_app_team/features/2nd_treatment/abc_guide_screen.dart';
 import 'package:gad_app_team/features/3rd_treatment/week3_screen.dart';
 import 'package:gad_app_team/features/4th_treatment/week4_screen.dart';
 import 'package:gad_app_team/features/5th_treatment/week5_screen.dart';
 import 'package:gad_app_team/features/6th_treatment/week6_screen.dart';
-
+import 'package:gad_app_team/features/7th_treatment/week7_screen.dart';
 
 const _kTotalWeeks = 8; // Mindrium 프로그램 총 주차
 
@@ -110,6 +111,7 @@ class TreatmentScreen extends StatelessWidget {
       Week4Screen(),
       Week5Screen(),
       Week6Screen(),
+      Week7Screen(),
     ];
 
     return Scaffold(
@@ -172,7 +174,7 @@ class TreatmentScreen extends StatelessWidget {
                                 ? () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => const AbcInputScreen(),
+                                    builder: (_) => const AbcGuideScreen(),
                                   ),
                                 )
                                 : isEnabled && index < weekScreens.length

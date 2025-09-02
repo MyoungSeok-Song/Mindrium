@@ -80,7 +80,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                         Text(
                           isFromAfterSud
                               ? "아직 불안 점수가 낮아지지 않으셨네요. 또 다른 불안한 생각이 있어서 그럴 수 있어요.\n불안을 만드는 또 다른 생각을 하나 찾아보도록 해요!"
-                              : "아직 도움이 되는 생각을 찾아보지 않은 부분이 있으시네요.\n모든 생각에서 꼭 도움이 되는 생각을 찾아봐야 하는 건 아니지만,\n 그 중 하나라도 '조금 덜 불안해지는 방향'으로 바라보면 어떨까요?",
+                              : "아직 도움이 되는 생각을 찾아보지 않은 부분이 있으시네요.\n모든 생각에서 꼭 도움이 되는 생각을 찾아봐야 하는 건 아니지만, 그 중 하나라도 '조금 덜 불안해지는 방향'으로 바라보면 어떨까요?",
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
@@ -88,7 +88,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                             height: 1.5,
                             letterSpacing: 0.1,
                           ),
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                         ),
                         const SizedBox(height: 48),
                         // 상하로 배치된 버튼들
@@ -102,7 +102,7 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                   height: 56,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Skip했던 생각들에 대해 다시 대체 생각 작성
+                                      // Skip했던 생각들에 대해 처음부터 다시 대체 생각 작성
                                       Navigator.pushReplacement(
                                         context,
                                         PageRouteBuilder(
@@ -112,8 +112,9 @@ class Week4SkipChoiceScreen extends StatelessWidget {
                                                 __,
                                                 ___,
                                               ) => Week4ConcentrationScreen(
-                                                bListInput:
-                                                    allBList, // 모든 B 생각들을 전달
+                                                bListInput: List<String>.from(
+                                                  allBList,
+                                                ), // 처음부터 다시 시작하도록 복사
                                                 beforeSud: beforeSud,
                                                 allBList: allBList,
                                                 abcId: abcId,

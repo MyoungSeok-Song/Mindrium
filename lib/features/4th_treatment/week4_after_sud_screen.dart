@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gad_app_team/common/constants.dart';
 import 'package:gad_app_team/widgets/custom_appbar.dart';
 import 'package:gad_app_team/widgets/navigation_button.dart';
-import 'week4_visual_screen.dart'; // Added import for Week4VisualScreen
+// import 'week4_visual_screen.dart'; // Added import for Week4VisualScreen
+import 'week4_finish_screen.dart';
 import 'week4_skip_choice_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -115,19 +116,17 @@ class _Week4AfterSudScreenState extends State<Week4AfterSudScreen> {
 
   void _handleNext() {
     if (_sud < widget.beforeSud) {
-      // SUD가 낮아졌으면: Week4VisualScreen으로 이동
+      // SUD가 낮아졌으면: Week4FinishScreen으로 이동
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
           pageBuilder:
-              (_, __, ___) => Week4VisualScreen(
-                previousChips: [
-                  ..._originalBList,
-                  ...widget.allBList.where(
-                    (thought) => !_originalBList.contains(thought),
-                  ),
-                ],
-                alternativeChips: _allAlternativeThoughts,
+              (_, __, ___) => Week4FinishScreen(
+                beforeSud: widget.beforeSud,
+                afterSud: _sud,
+                alternativeThoughts: _allAlternativeThoughts,
+                isFromAfterSud: true,
+                loopCount: widget.loopCount,
               ),
           transitionDuration: Duration.zero,
           reverseTransitionDuration: Duration.zero,
@@ -156,7 +155,6 @@ class _Week4AfterSudScreenState extends State<Week4AfterSudScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     final Color trackColor =
         _sud <= 2
             ? Colors.green

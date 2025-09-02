@@ -233,9 +233,11 @@ class _Week4AlternativeThoughtsScreenState
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          '도움이 되는 생각을 찾아볼까요?',
-                          style: TextStyle(
+                        Text(
+                          _chips.isEmpty
+                              ? '도움이 되는 생각을 찾아볼까요?'
+                              : '혹시 또 다른 도움이 되는 생각이 있다면 입력해주시고, 없으시다면 다음을 눌러주세요.',
+                          style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             color: Colors.indigo,
@@ -272,12 +274,14 @@ class _Week4AlternativeThoughtsScreenState
                                         runSpacing: 8,
                                         children:
                                             _chips
+                                                .asMap()
+                                                .entries
                                                 .map(
-                                                  (text) => Container(
+                                                  (entry) => Container(
                                                     padding:
                                                         const EdgeInsets.symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 10,
+                                                          horizontal: 12,
+                                                          vertical: 8,
                                                         ),
                                                     margin:
                                                         const EdgeInsets.symmetric(
@@ -298,16 +302,57 @@ class _Week4AlternativeThoughtsScreenState
                                                             12,
                                                           ),
                                                     ),
-                                                    child: Text(
-                                                      text,
-                                                      style: const TextStyle(
-                                                        color: Color(
-                                                          0xFF2962F6,
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Flexible(
+                                                          child: Text(
+                                                            entry.value,
+                                                            style:
+                                                                const TextStyle(
+                                                                  color: Color(
+                                                                    0xFF2962F6,
+                                                                  ),
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                          ),
                                                         ),
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
+                                                        const SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              _chips.removeAt(
+                                                                entry.key,
+                                                              );
+                                                            });
+                                                          },
+                                                          child: Container(
+                                                            width: 20,
+                                                            height: 20,
+                                                            decoration:
+                                                                const BoxDecoration(
+                                                                  color: Color(
+                                                                    0xFFCED4DA,
+                                                                  ),
+                                                                  shape:
+                                                                      BoxShape
+                                                                          .circle,
+                                                                ),
+                                                            child: const Icon(
+                                                              Icons.close,
+                                                              size: 14,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 )

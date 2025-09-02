@@ -302,7 +302,7 @@ class Week4ClassificationScreenState extends State<Week4ClassificationScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          '위 생각에 대해 얼마나 강하게 믿고 계시나요?\n아래 슬라이더를 조정해 주세요.',
+                          '현재 위 생각에 대해 얼마나 강하게 믿고 계시나요?\n아래 슬라이더를 조정하고 다음을 눌러주세요.',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,

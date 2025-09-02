@@ -141,7 +141,7 @@ class _Week4AfterAgreementScreenState extends State<Week4AfterAgreementScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          '지금은 위 생각에 대해 얼마나 강하게 믿고 계십니까?\n아래 슬라이더를 조정해 주세요.',
+                          '도움이 되는 생각을 찾아본 후, 지금은 위 생각에 대해 얼마나 강하게 믿고 계십니까?\n아래 슬라이더를 조정하고 다음을 눌러주세요.',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,

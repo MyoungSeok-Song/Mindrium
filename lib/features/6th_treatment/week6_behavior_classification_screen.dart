@@ -12,6 +12,7 @@ class Week6BehaviorClassificationScreen extends StatelessWidget {
   final double longTermValue; // 장기 슬라이더 값
   final List<String>? remainingBehaviors; // 남은 행동 목록
   final List<String> allBehaviorList; // 전체 행동 목록
+  final List<Map<String, dynamic>>? mismatchedBehaviors; // 일치하지 않은 행동들
 
   const Week6BehaviorClassificationScreen({
     super.key,
@@ -21,6 +22,7 @@ class Week6BehaviorClassificationScreen extends StatelessWidget {
     required this.longTermValue,
     this.remainingBehaviors,
     required this.allBehaviorList,
+    this.mismatchedBehaviors,
   });
 
   @override
@@ -128,6 +130,7 @@ class Week6BehaviorClassificationScreen extends StatelessWidget {
                       longTermValue: longTermValue,
                       remainingBehaviors: remainingBehaviors,
                       allBehaviorList: allBehaviorList,
+                      mismatchedBehaviors: mismatchedBehaviors,
                     ),
                 transitionDuration: Duration.zero,
                 reverseTransitionDuration: Duration.zero,

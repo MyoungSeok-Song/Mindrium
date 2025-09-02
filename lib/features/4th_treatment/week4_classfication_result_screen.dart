@@ -56,7 +56,7 @@ class Week4ClassificationResultScreen extends StatelessWidget {
           '방금 보셨던 "$mainThought"(라)는 생각에 대해 도움이 되는 생각을 찾아보는 시간을 가져보겠습니다!';
     } else {
       mainQuestionText =
-          '방금 보셨던 "$mainThought"(라)는 생각에 대해 도움이 되는 생각을 찾아보는 시간을 가져볼까요?';
+          '방금 보셨던 "$mainThought"(라)는 생각에 대해 도움이 되는 생각을 찾아보는 시간을 가져볼까요?\n\n만약 지금은 좀 부담스러우시다면 걱정일기에 작성하셨던 다른 생각들을 먼저 보고 다시 돌아와도 괜찮아요.';
     }
 
     // Safe defaults when nullable params are not provided
@@ -126,12 +126,12 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                             height: 1.5,
                             letterSpacing: 0.1,
                           ),
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                         ),
                         if (!isFromAnxietyScreen) ...[
                           const SizedBox(height: 16),
                           Text(
-                            '만약 지금은 좀 부담스러우시다면 걱정일기에 작성하셨던 다른 생각들을 먼저 보고 다시 돌아와도 괜찮아요.',
+                            '아래 두 가지 방법 중 하나를 선택해주세요.',
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -220,23 +220,93 @@ class Week4ClassificationResultScreen extends StatelessWidget {
                                         ...?existingAlternativeThoughts,
                                         ...?alternativeThoughts,
                                       ]);
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder:
-                                              (_) => Week4ConcentrationScreen(
-                                                bListInput: safeRemainingBList,
-                                                beforeSud: safeBeforeSud,
-                                                allBList: safeAllBList,
-                                                abcId: abcId,
-                                                loopCount: loopCount,
-                                                alternativeThoughts:
-                                                    allAltThoughts,
-                                                existingAlternativeThoughts:
-                                                    allAltThoughts,
-                                              ),
-                                        ),
+
+                                      debugPrint(
+                                        'existingAlternativeThoughts: $existingAlternativeThoughts',
                                       );
+                                      debugPrint(
+                                        'alternativeThoughts: $alternativeThoughts',
+                                      );
+                                      debugPrint(
+                                        'allAltThoughts: $allAltThoughts',
+                                      );
+                                      debugPrint(
+                                        'allAltThoughts.isEmpty: ${allAltThoughts.isEmpty}',
+                                      );
+
+                                      // 모든 생각에 대해 도움이 되는 생각을 작성하지 않았는지 확인
+                                      final hasAnyAlternativeThoughts =
+                                          (existingAlternativeThoughts
+                                                  ?.isNotEmpty ==
+                                              true) ||
+                                          (alternativeThoughts?.isNotEmpty ==
+                                              true);
+
+                                      if (hasAnyAlternativeThoughts) {
+                                        // 도움이 되는 생각을 작성했다면 concentration_screen으로 이동 (다음 생각 진행)
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder:
+                                                (_) => Week4ConcentrationScreen(
+                                                  bListInput:
+                                                      safeRemainingBList,
+                                                  beforeSud: safeBeforeSud,
+                                                  allBList: safeAllBList,
+                                                  abcId: abcId,
+                                                  loopCount: loopCount,
+                                                  alternativeThoughts:
+                                                      allAltThoughts,
+                                                  existingAlternativeThoughts:
+                                                      allAltThoughts,
+                                                ),
+                                          ),
+                                        );
+                                      } else {
+                                        // 도움이 되는 생각을 작성하지 않았을 때
+                                        if (safeRemainingBList.isNotEmpty) {
+                                          // 아직 남은 생각이 있다면 concentration_screen으로 이동 (다음 생각 진행)
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (
+                                                    _,
+                                                  ) => Week4ConcentrationScreen(
+                                                    bListInput:
+                                                        safeRemainingBList,
+                                                    beforeSud: safeBeforeSud,
+                                                    allBList: safeAllBList,
+                                                    abcId: abcId,
+                                                    loopCount: loopCount,
+                                                    alternativeThoughts:
+                                                        allAltThoughts,
+                                                    existingAlternativeThoughts:
+                                                        allAltThoughts,
+                                                  ),
+                                            ),
+                                          );
+                                        } else {
+                                          // 모든 생각을 건너뛰었다면 skip_choice_screen으로 이동
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (_) => Week4SkipChoiceScreen(
+                                                    allBList: safeAllBList,
+                                                    beforeSud: safeBeforeSud,
+                                                    remainingBList:
+                                                        safeRemainingBList,
+                                                    isFromAfterSud: false,
+                                                    existingAlternativeThoughts:
+                                                        allAltThoughts,
+                                                    abcId: abcId,
+                                                    loopCount: loopCount,
+                                                  ),
+                                            ),
+                                          );
+                                        }
+                                      }
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,

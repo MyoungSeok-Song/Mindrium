@@ -7,6 +7,7 @@ import 'package:gad_app_team/features/4th_treatment/week4_classfication_screen.d
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gad_app_team/features/4th_treatment/week4_after_sud_screen.dart';
+import 'package:gad_app_team/features/4th_treatment/week4_skip_choice_screen.dart';
 
 class Week4ConcentrationScreen extends StatefulWidget {
   final List<String> bListInput;
@@ -154,22 +155,60 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
     debugPrint(
       'Week4ConcentrationScreen bListInput: ' + widget.bListInput.toString(),
     );
+    debugPrint(
+      'Week4ConcentrationScreen bListInput.isEmpty: ' +
+          widget.bListInput.isEmpty.toString(),
+    );
+    debugPrint(
+      'Week4ConcentrationScreen bListInput.length: ' +
+          widget.bListInput.length.toString(),
+    );
+
     if (widget.bListInput.isEmpty) {
+      debugPrint('bListInput이 비어있음 - 도움이 되는 생각 작성 여부에 따라 분기');
       Future.microtask(() {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder:
-                (_) => Week4AfterSudScreen(
-                  beforeSud: widget.beforeSud,
-                  currentB: '',
-                  remainingBList: const [],
-                  allBList: widget.allBList,
-                  alternativeThoughts: const [],
-                  loopCount: widget.loopCount,
-                ),
-          ),
-        );
+        // 모든 생각을 건너뛰었을 때
+        if (widget.existingAlternativeThoughts?.isNotEmpty == true ||
+            widget.alternativeThoughts?.isNotEmpty == true) {
+          // 도움이 되는 생각을 작성했다면 Week4AfterSudScreen으로 이동 (SUD 평가)
+          debugPrint('도움이 되는 생각을 작성함 - Week4AfterSudScreen으로 이동');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (_) => Week4AfterSudScreen(
+                    beforeSud: widget.beforeSud,
+                    currentB: '',
+                    remainingBList: const [],
+                    allBList: widget.allBList,
+                    alternativeThoughts:
+                        widget.existingAlternativeThoughts ?? [],
+                    isFromAnxietyScreen: false,
+                    originalBList: widget.allBList,
+                    loopCount: widget.loopCount,
+                  ),
+            ),
+          );
+        } else {
+          // 도움이 되는 생각을 작성하지 않았다면 Week4SkipChoiceScreen으로 이동
+          debugPrint('도움이 되는 생각을 작성하지 않음 - Week4SkipChoiceScreen으로 이동');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (_) => Week4SkipChoiceScreen(
+                    allBList: widget.allBList,
+                    beforeSud: widget.beforeSud,
+                    remainingBList: const [],
+                    isFromAfterSud: false,
+                    existingAlternativeThoughts:
+                        widget.existingAlternativeThoughts ?? [],
+                    abcId: widget.abcId,
+                    loopCount: widget.loopCount,
+                  ),
+            ),
+          );
+        }
       });
       return const SizedBox.shrink();
     }
@@ -225,7 +264,7 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                             if (_showSituation)
                               Text(
                                 _abcModel != null
-                                    ? "'${_abcModel!['activatingEvent'] ?? ''}' (이) 상황을 잠시 집중해보겠습니다."
+                                    ? "'${_abcModel!['activatingEvent'] ?? ''}' (이)라는 상황을 잠시 집중해보겠습니다."
                                     : '이때의 상황을 자세하게 집중해 보세요.',
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -242,7 +281,7 @@ class _Week4ConcentrationScreenState extends State<Week4ConcentrationScreen> {
                                         _abcModel!['belief']
                                             .toString()
                                             .isNotEmpty
-                                    ? "'$currentThought' 생각에 대해 얼마나 강하게 믿고 계신지 알아볼게요."
+                                    ? "다음 생각인 '$currentThought'에 대해 얼마나 강하게 믿고 계신지 알아볼게요."
                                     : '위 생각에 대해 어느 정도 믿음을 가지고 있는지 알아볼게요.',
                                 style: const TextStyle(
                                   fontSize: 18,
