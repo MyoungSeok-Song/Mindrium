@@ -180,7 +180,7 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
                           if (_showSituation)
                             Text(
                               _abcModel != null
-                                  ? '"${_abcModel!['activatingEvent'] ?? ''}" (라)는 상황에서 "${_getFirstBehavior(_abcModel!['consequence_behavior'])}"(라)고 행동을 하였습니다.\n당시의 상황에 대해 잠시 집중해보겠습니다.'
+                                  ? '"${_abcModel!['activatingEvent'] ?? ''}" (이)라는 상황에서 "${_getFirstBehavior(_abcModel!['consequence_behavior'])}"(이)라고 행동을 하였습니다.\n당시의 상황에 대해 잠시 집중해보겠습니다.'
                                   : '이때의 상황을\n자세하게 집중해 보세요.',
                               style: const TextStyle(
                                 fontSize: 18,
@@ -189,7 +189,7 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
                                 height: 1.5,
                                 letterSpacing: 0.1,
                               ),
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.left,
                             )
                           else
                             Text(
@@ -201,7 +201,7 @@ class _Week6ConcentrationScreenState extends State<Week6ConcentrationScreen> {
                                 height: 1.5,
                                 letterSpacing: 0.1,
                               ),
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.left,
                             ),
                         ],
                       ),

@@ -112,8 +112,8 @@ class _Week6RelieveSliderScreenState extends State<Week6RelieveSliderScreen> {
                       children: [
                         Text(
                           widget.isLongTerm
-                              ? '위 행동을 하신다면 장기적으로 불안이 완화될 것 같으신가요?\n아래 버튼 중 하나를 선택해 주세요.'
-                              : '위 행동을 하신다면 단기적으로 불안이 완화될 것 같으신가요?\n아래 버튼 중 하나를 선택해 주세요.',
+                              ? '위 행동을 하신다면 장기적으로 불안이 완화될 것 같으신가요? 아래 버튼 중 하나를 선택하고 다음을 눌러주세요.'
+                              : '위 행동을 하신다면 단기적으로 불안이 완화될 것 같으신가요? 아래 버튼 중 하나를 선택하고 다음을 눌러주세요.',
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black,

@@ -114,10 +114,10 @@ class _Week6BehaviorReflectionScreenState
           '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 직면하는 행동이라고 선택하셨지만, 실제로는 불안을 회피하는 쪽에 가까워 보이네요.';
     } else if (isShortTermHigh && isLongTermHigh) {
       mainText =
-          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 ${userChoice}이라고 선택하셨는데, 실제로는 중립적인 행동에 가까워 보이네요.';
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 ${userChoice}이라고 선택하셨네요.';
     } else {
       mainText =
-          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 ${userChoice}이라고 선택하셨는데, 실제로는 중립적인 행동에 가까워 보이네요.';
+          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동에 대해 불안을 ${userChoice}이라고 선택하셨네요.';
     }
     subText = '이 행동이 과연 나에게 도움이 되는지 다시 한번 더 생각해보아요!';
 

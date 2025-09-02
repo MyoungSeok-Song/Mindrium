@@ -49,14 +49,14 @@ class _Week6RelieveResultScreenState extends State<Week6RelieveResultScreen> {
     if (widget.behaviorType == 'face') {
       if (isHighRelief) {
         mainText =
-            '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동을 하게 되면\n$timePeriod적으로 불안이 많이 완화된다고 생각하시는군요.';
+            '방금 보셨던 "${widget.selectedBehavior}"(이)라는 행동을 하게 되면\n$timePeriod적으로 불안이 많이 완화된다고 생각하시는군요.';
         subText =
             widget.isLongTerm
                 ? '잘 따라오고 계십니다! 이제 위 행동이 어떤 유형에 속하는지 알아보겠습니다.'
                 : '이번에는 위 행동이 장기적으로 얼마나 불안을 완화할 수 있는지 알아볼게요!';
       } else {
         mainText =
-            '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동을 하게 되면\n$timePeriod적으로 불안이 적게 완화된다고 생각하시는군요.';
+            '방금 보셨던 "${widget.selectedBehavior}"(이)라는 행동을 하게 되면\n$timePeriod적으로 불안이 적게 완화된다고 생각하시는군요.';
         subText =
             widget.isLongTerm
                 ? '잘 따라오고 계십니다! 이제 위 행동이 어떤 유형에 속하는지 알아보겠습니다.'
@@ -65,14 +65,14 @@ class _Week6RelieveResultScreenState extends State<Week6RelieveResultScreen> {
     } else {
       if (isHighRelief) {
         mainText =
-            '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동을 하게 되면\n$timePeriod적으로 불안이 많이 완화된다고 생각하시는군요.';
+            '방금 보셨던 "${widget.selectedBehavior}"(이)라는 행동을 하게 되면\n$timePeriod적으로 불안이 많이 완화된다고 생각하시는군요.';
         subText =
             widget.isLongTerm
                 ? '잘 따라오고 계십니다! 이제 위 행동이 어떤 유형에 속하는지 알아보겠습니다.'
                 : '이번에는 위 행동이 장기적으로 얼마나 불안을 완화할 수 있는지 알아볼게요!';
       } else {
         mainText =
-            '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동을 하게 되면\n$timePeriod적으로 불안이 적게 완화된다고 생각하시는군요.';
+            '방금 보셨던 "${widget.selectedBehavior}"(이)라는 행동을 하게 되면\n$timePeriod적으로 불안이 적게 완화된다고 생각하시는군요.';
         subText =
             widget.isLongTerm
                 ? '잘 따라오고 계십니다! 이제 위 행동이 어떤 유형에 속하는지 알아보겠습니다.'
@@ -132,7 +132,7 @@ class _Week6RelieveResultScreenState extends State<Week6RelieveResultScreen> {
                           height: 1.5,
                           letterSpacing: 0.1,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                       )
                     else
                       Text(
@@ -144,7 +144,7 @@ class _Week6RelieveResultScreenState extends State<Week6RelieveResultScreen> {
                           height: 1.5,
                           letterSpacing: 0.1,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                       ),
                     const SizedBox(height: 48),
                   ],

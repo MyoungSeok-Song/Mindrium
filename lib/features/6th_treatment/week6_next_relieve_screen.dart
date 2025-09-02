@@ -37,11 +37,11 @@ class _Week6NextRelieveScreenState extends State<Week6NextRelieveScreen> {
 
     if (widget.behaviorType == 'face') {
       mainText =
-          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동을 불안을 직면하는 행동이라고 선택하셨네요.';
+          '방금 보셨던 "${widget.selectedBehavior}"(이)라는 행동을 불안을 직면하는 행동이라고 선택하셨네요.';
       subText = '불안을 직면하는 행동이라고 생각을 해봤을 때 단기적으로 얼마나 불안을 완화할 수 있는지 알아볼게요!';
     } else {
       mainText =
-          '방금 보셨던 "${widget.selectedBehavior}"(라)는 행동을 불안을 회피하는 행동이라고 선택하셨네요.';
+          '방금 보셨던 "${widget.selectedBehavior}"(이)라는 행동을 불안을 회피하는 행동이라고 선택하셨네요.';
       subText = '불안을 회피하는 행동이라고 생각을 해봤을 때 단기적으로 얼마나 불안을 완화할 수 있는지 알아볼게요!';
     }
 
@@ -97,7 +97,7 @@ class _Week6NextRelieveScreenState extends State<Week6NextRelieveScreen> {
                           height: 1.5,
                           letterSpacing: 0.1,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                       )
                     else
                       Text(
@@ -109,7 +109,7 @@ class _Week6NextRelieveScreenState extends State<Week6NextRelieveScreen> {
                           height: 1.5,
                           letterSpacing: 0.1,
                         ),
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                       ),
                     const SizedBox(height: 48),
                   ],

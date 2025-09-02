@@ -227,7 +227,7 @@ class Week6ClassificationScreenState extends State<Week6ClassificationScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
-                            "위 행동에 대해 불안을 직면하는 행동인지 회피하는 행동인지 선택해주세요.",
+                            "위 행동에 대해 어떤 행동인지 선택하고\n다음을 눌러주세요.",
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.black87,
