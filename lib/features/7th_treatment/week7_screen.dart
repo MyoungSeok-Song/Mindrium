@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gad_app_team/common/constants.dart';
 import 'package:gad_app_team/widgets/custom_appbar.dart';
 import 'package:gad_app_team/widgets/navigation_button.dart';
-import 'package:gad_app_team/features/6th_treatment/week6_abc_screen.dart';
+import 'package:gad_app_team/features/7th_treatment/week7_add_display_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:gad_app_team/data/user_provider.dart';
 
@@ -29,7 +29,7 @@ class _Week7ScreenState extends State<Week7Screen> {
             const Icon(Icons.lightbulb, size: 72, color: Color(0xFF3F51B5)),
             const SizedBox(height: 32),
             const Text(
-              '걱정일기를 통해 알아볼까요?',
+              '첫화면: 안내 화면?',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -44,7 +44,7 @@ class _Week7ScreenState extends State<Week7Screen> {
                     Provider.of<UserProvider>(context, listen: false).userName;
                 final displayName = (userName.isNotEmpty) ? userName : '사용자';
                 return Text(
-                  '$displayName님께서 작성하신 걱정일기의 내용을 살펴볼게요.',
+                  '$displayName님: To do list-내용',
                   style: TextStyle(fontSize: 20, color: Colors.black87),
                   textAlign: TextAlign.center,
                 );
@@ -57,7 +57,7 @@ class _Week7ScreenState extends State<Week7Screen> {
                 Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => const Week6AbcScreen(),
+                    pageBuilder: (_, __, ___) => const Week7AddDisplayScreen(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero,
                   ),
