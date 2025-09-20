@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gad_app_team/common/constants.dart';
 import 'package:gad_app_team/widgets/custom_appbar.dart';
 import 'package:gad_app_team/widgets/navigation_button.dart';
-import 'package:gad_app_team/features/6th_treatment/week6_abc_screen.dart';
 import 'package:gad_app_team/features/7th_treatment/week7_reason_input_screen.dart';
-import 'package:gad_app_team/features/7th_treatment/week7_gain_lose_screen.dart';
 import 'package:gad_app_team/features/7th_treatment/week7_planning_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +14,64 @@ class Week7AddDisplayScreen extends StatefulWidget {
 
   @override
   State<Week7AddDisplayScreen> createState() => _Week7AddDisplayScreenState();
+
+  // 전역 상태에 접근하기 위한 static getter
+  static Set<String> get globalAddedBehaviors {
+    final result = Set<String>.from(
+      _Week7AddDisplayScreenState._globalAddedBehaviors,
+    );
+    print('=== globalAddedBehaviors getter 호출됨 ===');
+    print('반환할 전역 상태: $result (길이: ${result.length})');
+    print('=== globalAddedBehaviors getter 완료 ===');
+    return result;
+  }
+
+  // 전역 상태를 업데이트하기 위한 static 메서드
+  static void updateGlobalAddedBehaviors(Set<String> behaviors) {
+    print('=== updateGlobalAddedBehaviors 호출됨 ===');
+    print(
+      '업데이트 전 전역 상태: ${_Week7AddDisplayScreenState._globalAddedBehaviors} (길이: ${_Week7AddDisplayScreenState._globalAddedBehaviors.length})',
+    );
+    print('새로운 상태: $behaviors (길이: ${behaviors.length})');
+
+    // 새로운 상태로 교체
+    _Week7AddDisplayScreenState._globalAddedBehaviors.clear();
+    _Week7AddDisplayScreenState._globalAddedBehaviors.addAll(behaviors);
+
+    print(
+      '업데이트 후 전역 상태: ${_Week7AddDisplayScreenState._globalAddedBehaviors} (길이: ${_Week7AddDisplayScreenState._globalAddedBehaviors.length})',
+    );
+    print('=== updateGlobalAddedBehaviors 완료 ===');
+  }
+
+  // 새로운 행동들에 접근하기 위한 static getter
+  static List<String> get globalNewBehaviors {
+    final result = List<String>.from(
+      _Week7AddDisplayScreenState._globalNewBehaviors,
+    );
+    print('=== globalNewBehaviors getter 호출됨 ===');
+    print('반환할 새로운 행동들: $result (길이: ${result.length})');
+    print('=== globalNewBehaviors getter 완료 ===');
+    return result;
+  }
+
+  // 새로운 행동들을 업데이트하기 위한 static 메서드
+  static void updateGlobalNewBehaviors(List<String> behaviors) {
+    print('=== updateGlobalNewBehaviors 호출됨 ===');
+    print(
+      '업데이트 전 새로운 행동들: ${_Week7AddDisplayScreenState._globalNewBehaviors} (길이: ${_Week7AddDisplayScreenState._globalNewBehaviors.length})',
+    );
+    print('새로운 상태: $behaviors (길이: ${behaviors.length})');
+
+    // 새로운 상태로 교체
+    _Week7AddDisplayScreenState._globalNewBehaviors.clear();
+    _Week7AddDisplayScreenState._globalNewBehaviors.addAll(behaviors);
+
+    print(
+      '업데이트 후 새로운 행동들: ${_Week7AddDisplayScreenState._globalNewBehaviors} (길이: ${_Week7AddDisplayScreenState._globalNewBehaviors.length})',
+    );
+    print('=== updateGlobalNewBehaviors 완료 ===');
+  }
 }
 
 class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
@@ -27,11 +83,11 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
   Set<String> _addedBehaviors = {}; // 추가된 행동들을 추적
   late AnimationController _fadeController;
   late AnimationController _slideController;
-  late Animation<double> _fadeAnimation;
-  late Animation<Offset> _slideAnimation;
 
   // 추가된 행동들을 전역적으로 관리하기 위한 static 변수
   static final Set<String> _globalAddedBehaviors = {};
+  // 새로운 행동들을 전역적으로 관리하기 위한 static 변수
+  static final List<String> _globalNewBehaviors = [];
 
   @override
   void initState() {
@@ -45,18 +101,23 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut),
-    );
-
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
-    );
-
     _fetchLatestAbcModel();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print('=== Week7AddDisplayScreen didChangeDependencies 호출됨 ===');
+    // 화면이 다시 표시될 때마다 전역 상태와 동기화
+    _syncWithGlobalState();
+  }
+
+  @override
+  void didUpdateWidget(Week7AddDisplayScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print('=== Week7AddDisplayScreen didUpdateWidget 호출됨 ===');
+    // 위젯이 업데이트될 때도 전역 상태와 동기화
+    _syncWithGlobalState();
   }
 
   @override
@@ -64,6 +125,24 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
     _fadeController.dispose();
     _slideController.dispose();
     super.dispose();
+  }
+
+  void _syncWithGlobalState() {
+    // 전역 상태와 로컬 상태를 동기화
+    if (mounted) {
+      final globalBehaviors = Set.from(_globalAddedBehaviors);
+      print('=== _syncWithGlobalState 호출됨 ===');
+      print('동기화 전 - 로컬: $_addedBehaviors (길이: ${_addedBehaviors.length})');
+      print('동기화 전 - 전역: $globalBehaviors (길이: ${globalBehaviors.length})');
+
+      // 항상 전역 상태를 기준으로 로컬 상태 업데이트
+      print('전역 상태를 기준으로 로컬 상태 업데이트');
+      setState(() {
+        _addedBehaviors = globalBehaviors.cast<String>();
+      });
+      print('동기화 완료 - 로컬: $_addedBehaviors, 전역: $_globalAddedBehaviors');
+      print('=== _syncWithGlobalState 완료 ===');
+    }
   }
 
   Future<void> _fetchLatestAbcModel() async {
@@ -122,30 +201,13 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
           };
         }).toList();
 
-    // 전역 상태에서 추가된 행동들을 가져오기
-    _addedBehaviors = Set.from(_globalAddedBehaviors);
-
-    // initialBehavior가 있으면 추가
+    // initialBehavior가 있으면 전역 상태에 추가
     if (widget.initialBehavior != null) {
-      _addedBehaviors.add(widget.initialBehavior!);
       _globalAddedBehaviors.add(widget.initialBehavior!);
     }
 
-    // 첫 로드 시에만 초기 데이터 설정 (전역 상태가 비어있을 때)
-    if (_globalAddedBehaviors.isEmpty) {
-      // 추가된 행동들을 확인 (임시로 모든 회피 행동을 추가된 상태로 표시)
-      // 실제로는 Firebase나 로컬 저장소에서 가져와야 함
-      for (final card in _behaviorCards) {
-        if (card['classification'] == '회피') {
-          // 임시로 첫 번째 회피 행동만 추가된 상태로 표시 (테스트용)
-          if (card ==
-              _behaviorCards.firstWhere((c) => c['classification'] == '회피')) {
-            _addedBehaviors.add(card['behavior'] ?? '');
-            _globalAddedBehaviors.add(card['behavior'] ?? '');
-          }
-        }
-      }
-    }
+    // 전역 상태에서 추가된 행동들을 가져오기 (항상 동기화)
+    _addedBehaviors = Set.from(_globalAddedBehaviors);
   }
 
   String _getClassificationText(String classification) {
@@ -327,23 +389,6 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
     );
   }
 
-  void _addBehavior(String behavior) {
-    setState(() {
-      _addedBehaviors.add(behavior);
-      _globalAddedBehaviors.add(behavior);
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('"$behavior"이(가) 건강한 생활 습관에 추가되었습니다.'),
-        backgroundColor: const Color(0xFF4CAF50),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        margin: const EdgeInsets.all(16),
-      ),
-    );
-  }
-
   void _showRemoveConfirmationDialog(String behavior) {
     showDialog(
       context: context,
@@ -460,9 +505,16 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
   }
 
   void _removeFromHealthyHabits(String behavior) {
+    // 새로운 전역 상태 생성
+    final newGlobalBehaviors = Set<String>.from(_globalAddedBehaviors);
+    newGlobalBehaviors.remove(behavior);
+
+    // 전역 상태 업데이트 (다른 화면에서 참조할 수 있도록)
+    Week7AddDisplayScreen.updateGlobalAddedBehaviors(newGlobalBehaviors);
+
+    // 로컬 상태 업데이트
     setState(() {
       _addedBehaviors.remove(behavior);
-      _globalAddedBehaviors.remove(behavior);
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
@@ -476,43 +528,161 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
     );
   }
 
-  void _navigateToGainLoseScreen(String behavior) {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => Week7GainLoseScreen(behavior: behavior),
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
-      ),
-    ).then((result) {
-      print('결과 받음: $result, 타입: ${result.runtimeType}');
-      // 결과가 있으면 해당 행동을 추가된 상태로 표시
-      if (result != null && result is String) {
-        print('행동 추가됨: $result');
-        setState(() {
-          _addedBehaviors.add(result);
-          _globalAddedBehaviors.add(result);
-        });
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('"$result"이(가) 건강한 생활 습관에 추가되었습니다.'),
-            backgroundColor: const Color(0xFF4CAF50),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            margin: const EdgeInsets.all(16),
+  void _showAddToHealthyHabitsDialog(String behavior) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
+          title: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF4CAF50), Color(0xFF66BB6A)],
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(
+                  Icons.health_and_safety,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Text(
+                '건강한 생활 습관 추가',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF2D3748),
+                ),
+              ),
+            ],
+          ),
+          content: const Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '이 행동을 건강한 생활 습관에\n추가하시겠습니까?',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF718096),
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: const BorderSide(
+                          color: Color(0xFFE2E8F0),
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      '아니요',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF718096),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _addBehaviorDirectly(behavior);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4CAF50),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: const Text(
+                      '예',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+          actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
         );
-      } else {
-        print('결과가 null이거나 String이 아님');
-      }
+      },
+    );
+  }
+
+  void _addBehaviorDirectly(String behavior) {
+    print('_addBehaviorDirectly 시작: $behavior');
+    print('추가 전 로컬 상태: $_addedBehaviors');
+    print('추가 전 전역 상태: $_globalAddedBehaviors');
+
+    // 새로운 전역 상태 생성
+    final newGlobalBehaviors = Set<String>.from(_globalAddedBehaviors);
+    newGlobalBehaviors.add(behavior);
+
+    // 전역 상태 업데이트 (다른 화면에서 참조할 수 있도록)
+    Week7AddDisplayScreen.updateGlobalAddedBehaviors(newGlobalBehaviors);
+
+    // 로컬 상태 업데이트
+    setState(() {
+      _addedBehaviors.add(behavior);
     });
+
+    print('추가 후 로컬 상태: $_addedBehaviors');
+    print('추가 후 전역 상태: $_globalAddedBehaviors');
+    print('전역 상태 업데이트 완료');
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('"$behavior"이(가) 건강한 생활 습관에 추가되었습니다.'),
+        backgroundColor: const Color(0xFF4CAF50),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(16),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    // 화면이 빌드될 때마다 전역 상태와 동기화 (setState 없이)
+    final globalBehaviors = Set.from(_globalAddedBehaviors);
+    if (_addedBehaviors != globalBehaviors) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _addedBehaviors = globalBehaviors.cast<String>();
+          });
+        }
+      });
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFFFBF8FF),
       appBar: const CustomAppBar(title: '7주차 - 생활 습관 개선'),
@@ -888,9 +1058,9 @@ class _Week7AddDisplayScreenState extends State<Week7AddDisplayScreen>
                           // 회피 행동이고 추가되지 않았으면 추가 다이얼로그 표시
                           _showAddConfirmationDialog(card['behavior'] ?? '');
                         } else {
-                          // 직면 행동이고 추가되지 않았으면 GainLose 화면으로 이동
+                          // 직면 행동이고 추가되지 않았으면 바로 추가 다이얼로그 표시
                           print('불안 직면 행동 클릭됨: ${card['behavior']}');
-                          _navigateToGainLoseScreen(card['behavior'] ?? '');
+                          _showAddToHealthyHabitsDialog(card['behavior'] ?? '');
                         }
                       },
                       child: Container(
