@@ -13,13 +13,13 @@ import 'package:gad_app_team/widgets/card_container.dart';
 
 // ─── Feature Screens ────────────────────────────────────────────────────
 import 'package:gad_app_team/features/1st_treatment/week1_screen.dart';
-import 'package:gad_app_team/features/2nd_treatment/abc_input_screen.dart';
-import 'package:gad_app_team/features/2nd_treatment/abc_guide_screen.dart';
+import 'package:gad_app_team/features/2nd_treatment/week2_screen.dart';
 import 'package:gad_app_team/features/3rd_treatment/week3_screen.dart';
 import 'package:gad_app_team/features/4th_treatment/week4_screen.dart';
 import 'package:gad_app_team/features/5th_treatment/week5_screen.dart';
 import 'package:gad_app_team/features/6th_treatment/week6_screen.dart';
 import 'package:gad_app_team/features/7th_treatment/week7_screen.dart';
+import 'package:gad_app_team/features/8th_treatment/week8_screen.dart';
 
 const _kTotalWeeks = 8; // Mindrium 프로그램 총 주차
 
@@ -106,12 +106,13 @@ class TreatmentScreen extends StatelessWidget {
     // 주차별 연결된 화면 (추후 주차별로 추가 가능)
     final List<Widget> weekScreens = const [
       Week1Screen(), // 1주차
-      AbcInputScreen(), // 2주차
+      Week2Screen(), // 2주차
       Week3Screen(), // 3주차
       Week4Screen(),
       Week5Screen(),
       Week6Screen(),
       Week7Screen(),
+      Week8Screen(), // 8주차
     ];
 
     return Scaffold(
@@ -152,10 +153,10 @@ class TreatmentScreen extends StatelessWidget {
               if (!userDayCounter.isUserLoaded) return const SizedBox();
               if (!snap.hasData) return const SizedBox();
 
-              final completed = snap.data!['completed']!;
+              // final completed = snap.data!['completed']!;
 
-              final days = userDayCounter.daysSinceJoin;
-              final weekByDays = (days ~/ 7);
+              // final days = userDayCounter.daysSinceJoin;
+              // final weekByDays = (days ~/ 7);
 
               return Column(
                 children: List.generate(weekContents.length, (index) {
@@ -170,14 +171,7 @@ class TreatmentScreen extends StatelessWidget {
                         enabled: isEnabled,
                         titleFontWeight: FontWeight.bold,
                         onTap:
-                            isEnabled && index == 1
-                                ? () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const AbcGuideScreen(),
-                                  ),
-                                )
-                                : isEnabled && index < weekScreens.length
+                            isEnabled && index < weekScreens.length
                                 ? () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
